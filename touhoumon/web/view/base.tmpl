@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Touhoumon Team Statistics</title>
+<style type="text/css">
+html {
+	margin: 0 5em;
+	padding: 0;
+	height: 100%;
+	background-color: floralwhite;
+	font-family: Tahoma, Verdana, Arial;
+	font-size: 11pt;
+}
+body {
+	margin: 0;
+	min-height: 100%;
+	background-color: white;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+body > header {
+	text-align: center;
+}
+a, a:visited {
+	color: #043C6B;
+	text-decoration: none;
+}
+a:hover {
+	color: #FF4C00;
+	font-weight: bold;
+}
+nav {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	text-align: center;
+}
+nav li {
+	list-style-type: none;
+	display: inline;
+	margin: 0.5em 1em;
+}
+header, section {
+	padding: 0.2em;
+}
+th {
+	text-align: left;
+}
+#content {
+	padding-left: 0.7em;
+	padding-right: 0.7em;
+}
+#offensive, #defensive, #stats {
+	display:inline-block;
+	vertical-align: top;
+}
+.stat-block {
+	color: white;
+	background-color: royalblue;
+	border: 1px solid black;
+}
+.team-cell {
+	text-align: center;
+	padding: 0px 10px;
+}
+#interactive_output {
+	width: 100%;
+	height: 300px;
+}
+#search {
+	min-width: 250px;
+}
+.dream { background-color: #A8A878; color: #000000; }
+.ghost { background-color: #705898; color: #EEEEEE; }
+.flying { background-color: #A890F0; color: #000000; }
+.beast { background-color: #B8A038; color: #000000; }
+.miasma { background-color: #A040A0; color: #EEEEEE; }
+.steel { background-color: #B8B8D0; color: #000000; }
+.dark { background-color: #507888; color: #EEEEEE; }
+.earth { background-color: #E0C068; color: #000000; }
+.fire { background-color: #F08030; color: #000000; }
+.water { background-color: #6890F0; color: #000000; }
+.wind { background-color: #D8E030; color: #000000; }
+.nature { background-color: #78C850; color: #000000; }
+.ice { background-color: #98D8D8; color: #000000; }
+.faith { background-color: #F8B010; color: #000000; }
+.reason { background-color: #F85888; color: #FFFFFF; }
+.heart { background-color: #F8A8B8; color: #000000; }
+.illusion { background-color: #D8D8C0; color: #000000; }
+
+</style>
+</head>
+<body>
+	<header>
+	<h1>Touhoumon Team Statistics</h1>
+	</header>
+	<nav>
+	<ul>
+		<li><a href="${make_url('analyze:index')}">Analyze team</a></li>
+		<li><a href="${thppwiki('Type_Chart')}">Type chart</a></li>
+		<li><a href="${make_url('interactive:index')}">Interactive type information</a> (<a href="${make_url('interactiveold:index')}">old</a>)</li>
+		</ul>
+	</nav>
+	<section id="content">
+	<%block name="content"></%block>
+	</section>
+</body>
+</html>

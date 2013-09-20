@@ -1,0 +1,7835 @@
+<!--
+   File:   moves.xml
+   Author: JJames
+
+   Created on August 16 2010, 11:43 PM
+
+   This file is a part of Shoddy Battle.
+   Copyright (C) 2009  Catherine Fitzpatrick
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Affero General Public License
+   as published by the Free Software Foundation; either version 3
+   of the License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program; if not, visit the Free Software Foundation, Inc.
+   online at http://gnu.org.
+-->
+
+<!--
+    These are the moves that go to Touhou Puppet Play 1.8.
+    They are listed in the same order that the game
+    internally sorts them to make cross comparing a little
+    easier. Any updates to Shoddy itself should be diff'd
+    with the original xml.
+-->
+
+<shoddybattle>
+
+<move name="Pound" id="0">
+<type>Illusion</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>40</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Karate Chop" id="1">
+<type>Dream</type>
+<class>Physical</class>
+<power>50</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Knock Off" id="2">
+<type>Dark</type>
+<class>Physical</class>
+<power>50</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+var damage = field.calculate(this, user, target, targets);
+if (damage) {
+    target.hp -= damage;
+    if (target.item && !target.sendMessage("informRemoveItem")) {
+        field.print(Text.battle_messages_unique(12, user, target, target.item));
+        target.item = null;
+    }
+}
+]]>
+</use>
+</move>
+
+<move name="Comet Punch" id="3">
+<type>Dream</type>
+<class>Physical</class>
+<power>25</power>
+<accuracy>0.95</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMultipleHitMove(this);
+]]>
+</init>
+</move>
+
+<move name="Drain Punch" id="4">
+<type>Dream</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, -2);
+]]>
+</init>
+</move>
+
+<move name="Pay Day" id="5">
+<type>Illusion</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+target.hp -= field.calculate(this, user, target, targets);
+field.print(Text.battle_messages_unique(3));
+]]>
+</use>
+</move>
+
+<move name="Fire Punch" id="6">
+<type>Fire</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[BurnEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Ice Punch" id="7">
+<type>Ice</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FreezeEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Thunderpunch" id="8">
+<type>Wind</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Scratch" id="9">
+<type>Steel</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>35</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Night Slash" id="10">
+<type>Dark</type>
+<class>Physical</class>
+<power>70</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Judgement" id="11">
+<type>Faith</type>
+<class>Special</class>
+<power>1</power>
+<accuracy>0.30</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeOneHitKillMove(this);
+]]>
+</init>
+</move>
+
+<move name="Gust" id="12">
+<type>Wind</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>35</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+this.power_ = this.power;
+]]>
+</init>
+<use>
+<![CDATA[
+this.power = this.power_;
+var effect = target.getStatus("ChargeMoveEffect");
+if (effect) {
+    var name = effect.move.name;
+    if ((name == "Fly") || (name == "Bounce")) {
+        this.power *= 2;
+    }
+}
+target.hp -= field.calculate(this, user, target, targets);
+]]>
+</use>
+</move>
+
+<move name="Swords Dance" id="13">
+<type>Steel</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.ATTACK, 2));
+]]>
+</use>
+</move>
+
+<move name="Cut" id="14">
+<type>Steel</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Razor Wind" id="15">
+<type>Flying</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Gale" id="16">
+<type>Flying</type>
+<class>Special</class>
+<priority>1</priority>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Whirlwind" id="17">
+<type>Wind</type>
+<class>Other</class>
+<priority>-6</priority>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeRandomSwitchMove(this);
+]]>
+</init>
+</move>
+
+<move name="Fly" id="18">
+<type>Flying</type>
+<class>Physical</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeChargeMove(this,
+        Text.battle_messages_charge.wrap(5),
+        ["Gust", "Thunder", "Twister", "Soar"]);
+]]>
+</init>
+</move>
+
+<move name="Bind" id="19">
+<type>Heart</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeTemporaryTrappingMove(this, Text.battle_messages_unique.wrap(72));
+]]>
+</init>
+</move>
+
+<move name="Power Whip" id="20">
+<type>Nature</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.85</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Vine Whip" id="21">
+<type>Nature</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>35</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Stomp" id="22">
+<type>Beast</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Double Kick" id="23">
+<type>Dream</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeTwoHitMove(this);
+]]>
+</init>
+</move>
+
+<move name="Giga Impact" id="24">
+<type>Dark</type>
+<class>Physical</class>
+<power>130</power>
+<accuracy>0.85</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeJumpKickMove(this);
+]]>
+</init>
+</move>
+
+<move name="Jump Kick" id="25">
+<type>Dream</type>
+<class>Physical</class>
+<power>85</power>
+<accuracy>0.95</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeJumpKickMove(this);
+]]>
+</init>
+</move>
+
+<move name="Rolling Kick" id="26">
+<type>Dream</type>
+<class>Physical</class>
+<power>80</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Sand-Attack" id="27">
+<type>Earth</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ACCURACY, -1)]]);
+]]>
+</init>
+</move>
+
+<move name="Headbutt" id="28">
+<type>Heart</type>
+<class>Physical</class>
+<power>70</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Knife Throw" id="29">
+<type>Steel</type>
+<class>Physical</class>
+<power>50</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Magic Knife" id="30">
+<type>Reason</type>
+<class>Physical</class>
+<power>25</power>
+<accuracy>0.95</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMultipleHitMove(this);
+]]>
+</init>
+</move>
+
+<move name="Sculpture" id="31">
+<type>Steel</type>
+<class>Physical</class>
+<power>95</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Tackle" id="32">
+<type>Beast</type>
+<class>Physical</class>
+<power>35</power>
+<accuracy>0.95</accuracy>
+<pp>35</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Body Slam" id="33">
+<type>Heart</type>
+<class>Physical</class>
+<power>85</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Wrap" id="34">
+<type>Nature</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeTemporaryTrappingMove(this, Text.battle_messages_unique.wrap(75));
+]]>
+</init>
+</move>
+
+<move name="Double-Edge" id="35">
+<type>Beast</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, 3);
+]]>
+</init>
+</move>
+
+<move name="Thrash" id="36">
+<type>Dark</type>
+<class>Physical</class>
+<power>100</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, -1), 1, true]]);
+]]>
+</init>
+</move>
+
+<move name="Head Smash" id="37">
+<type>Earth</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, 2);
+]]>
+</init>
+</move>
+
+<move name="Tail Whip" id="38">
+<type>Beast</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, -1)]]);
+]]>
+</init>
+</move>
+
+<move name="Poison Sting" id="39">
+<type>Miasma</type>
+<class>Physical</class>
+<power>30</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[PoisonEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Sealing Needle" id="40">
+<type>Faith</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Pin Missile" id="41">
+<type>Faith</type>
+<class>Physical</class>
+<power>25</power>
+<accuracy>0.95</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMultipleHitMove(this);
+]]>
+</init>
+</move>
+
+<move name="Leer" id="42">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, -1)]]);
+]]>
+</init>
+</move>
+
+<move name="Bite" id="43">
+<type>Beast</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Growl" id="44">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>40</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ATTACK, -1)]]);
+]]>
+</init>
+</move>
+
+<move name="Roar" id="45">
+<type>Beast</type>
+<class>Other</class>
+<priority>-6</priority>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+makeRandomSwitchMove(this);
+]]>
+</init>
+</move>
+
+<move name="Sing" id="46">
+<type>Flying</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.60</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[SleepEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Jamming" id="47">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+makeTrappingMove(this);
+]]>
+</init>
+</move>
+
+<move name="Sonicboom" id="48">
+<type>Steel</type>
+<class>Special</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -1), 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Disable" id="49">
+<type>Ghost</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+if (target.getStatus("DisableEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+// Fails if the target doesn't know the last move it used or if that move
+// has zero PP or if the target's last move is null.
+var move = target.lastMove;
+if (!move || (target.getPp(move) <= 0)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var effect = new StatusEffect("DisableEffect");
+effect.name = Text.battle_messages_unique(69);
+effect.move = move;
+effect.turns = field.random(4, 7);
+effect.vetoSelection = function(user, move) {
+    if (user != this.subject)
+        return false;
+    return (move.name == this.move.name);
+};
+effect.vetoTier = 2;
+effect.vetoExecution = function(field, user, target, move) {
+    if (target != null)
+        return false;
+    if (user != this.subject)
+        return false;
+    if (move.name != this.move.name)
+        return false;
+    field.print(Text.battle_messages_unique(71, user, move));
+    return true;
+};
+effect.informFinishedSubjectExecution = function() {
+    if ((--this.turns <= 0) || (this.subject.getPp(this.move) <= 0)) {
+        this.subject.removeStatus(this);
+    }
+};
+target.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(70, target, move));
+]]>
+</use>
+</move>
+
+<move name="Poison Tears" id="50">
+<type>Miasma</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -1), 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Ember" id="51">
+<type>Fire</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[BurnEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Flamethrower" id="52">
+<type>Fire</type>
+<class>Special</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[BurnEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Mist" id="53">
+<type>Ice</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>Allies</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+this.prepareSelf = function(field, user) {
+    if (user.getStatus("MistEffect")) {
+        field.print(Text.battle_messages(0));
+        return;
+    }
+    var effect = new StatusEffect("MistEffect");
+    effect.name = Text.battle_messages_unique(106);
+    effect.radius = StatusEffect.RADIUS_USER_PARTY;
+    effect.turns = 5;
+    var party_ = user.party;
+    effect.applyEffect = function() {
+        return (this.subject.party == party_);
+    };
+    effect.beginTick = function() {
+        if (--this.turns != 0)
+            return;
+        // TODO: Reference trainer name in the message.
+        field.print(Text.battle_messages_unique(108, this.subject));
+        field.removeStatus(this);
+    };
+    effect.transformStatus = function(subject, status) {
+        if (subject.party != party_)
+            return status;
+        if (status.inducer == subject)
+            return status;
+        if (status.id != "StatChangeEffect")
+            return status;
+        if (status.delta_ > 0)
+            return status;
+        return null;
+    };
+    field.print(Text.battle_messages_unique(107, user));
+    field.applyStatus(effect);
+};
+this.use = function() {
+    // Does nothing.
+};
+]]>
+</init>
+</move>
+
+<move name="Water Gun" id="54">
+<type>Water</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Hydro Pump" id="55">
+<type>Water</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.85</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Surf" id="56">
+<type>Water</type>
+<class>Special</class>
+<power>95</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Ice Beam" id="57">
+<type>Ice</type>
+<class>Special</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FreezeEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Blizzard" id="58">
+<type>Ice</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.75</accuracy>
+<pp>5</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FreezeEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Psybeam" id="59">
+<type>Reason</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ConfusionEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Bubblebeam" id="60">
+<type>Water</type>
+<class>Special</class>
+<power>65</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPEED, -1), 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Aurora Beam" id="61">
+<type>Ice</type>
+<class>Special</class>
+<power>65</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ATTACK, -1), 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Hyper Beam" id="62">
+<type>Dark</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -1), 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Peck" id="63">
+<type>Flying</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>35</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Wing Attack" id="64">
+<type>Flying</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Submission" id="65">
+<type>Dream</type>
+<class>Physical</class>
+<priority>-6</priority>
+<power>85</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Low Kick" id="66">
+<type>Faith</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Counter" id="69">
+<type>Dream</type>
+<class>Physical</class>
+<priority>-5</priority>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>None</target>
+<flags>
+    <contact/>
+</flags>
+<init>
+<![CDATA[
+makeCounterMove(this, MoveClass.PHYSICAL, 2);
+]]>
+</init>
+</move>
+
+<move name="Seismic Toss" id="70">
+<type>Earth</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+if (target.isImmune(this)) {
+    field.print(Text.battle_messages(1, target));
+    return;
+}
+target.hp -= user.level;
+]]>
+</use>
+</move>
+
+<move name="Strength" id="71">
+<type>Dream</type>
+<class>Physical</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ATTACK, 1), 0.1, true]]);
+]]>
+</init>
+</move>
+
+<move name="Absorb" id="72">
+<type>Nature</type>
+<class>Special</class>
+<power>20</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, -2);
+]]>
+</init>
+</move>
+
+<move name="Mega Drain" id="73">
+<type>Nature</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, -2);
+]]>
+</init>
+</move>
+
+<move name="Leech Seed" id="74">
+<type>Nature</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+if (target.getStatus("LeechSeedEffect") || target.isType(Type.NATURE)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var party_ = user.party;
+var position_ = user.position;
+var effect = new StatusEffect("LeechSeedEffect");
+effect.name = Text.status_effects_leech_seed(0);
+effect.tier = 6;
+effect.subtier = 3;
+effect.tick = function() {
+    var p = field.getActivePokemon(party_, position_);
+    if (!p) return;
+    field.print(Text.status_effects_leech_seed(2, this.subject));
+    var damage = Math.floor(this.subject.getStat(Stat.HP) / 8);
+    if (damage < 1) damage = 1;
+    this.subject.hp -= damage;
+    if (target.sendMessage("informDrainHealth", p, damage))
+        return;
+    var adjusted = this.subject.sendMessage("informAbsorbHealth", this.subject, damage);
+    if (adjusted)
+        damage = adjusted;
+    p.hp += damage;
+};
+target.applyStatus(user, effect);
+field.print(Text.status_effects_leech_seed(1, target));
+]]>
+</use>
+</move>
+
+<move name="Growth" id="75">
+<type>Nature</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>40</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.SPATTACK, 1));
+]]>
+</use>
+</move>
+
+<move name="Razor Leaf" id="76">
+<type>Nature</type>
+<class>Physical</class>
+<power>65</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Solarbeam" id="77">
+<type>Nature</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeChargeMove(this, Text.battle_messages_charge.wrap(0));
+var parent = this.use;
+var power_ = this.power;
+this.use = function(field, user, target, targets) {
+    this.power = power_;
+    var flags = getGlobalController(user).getFlags();
+    if (flags[GlobalEffect.RAIN]
+            || flags[GlobalEffect.SAND]
+            || flags[GlobalEffect.HAIL]) {
+        this.power /= 2;
+    }
+    if (flags[GlobalEffect.SUN]) {
+        target.hp -= field.calculate(this, user, target, targets);
+        return;
+    }
+    parent.call(this, field, user, target, targets);
+};
+]]>
+</init>
+</move>
+
+<move name="Poisonpowder" id="78">
+<type>Miasma</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.75</accuracy>
+<pp>35</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[PoisonEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Stun Spore" id="79">
+<type>Nature</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.75</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Sleep Powder" id="80">
+<type>Nature</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.75</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[SleepEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Battle Chant" id="81">
+<type>Steel</type>
+<class>Physical</class>
+<power>100</power>
+<accuracy>0.85</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ATTACK, 1), 0.2, true]]);
+]]>
+</init>
+</move>
+
+<move name="Wire Web" id="82">
+<type>Nature</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.85</accuracy>
+<pp>10</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPEED, -2)]]);
+]]>
+</init>
+</move>
+
+<move name="Dark Pulse" id="83">
+<type>Dark</type>
+<class>Special</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Fire Spin" id="84">
+<type>Fire</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeTemporaryTrappingMove(this, Text.battle_messages_unique.wrap(74));
+]]>
+</init>
+</move>
+
+<move name="Thundershock" id="85">
+<type>Wind</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Thunderbolt" id="86">
+<type>Wind</type>
+<class>Special</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Thunder Wave" id="87">
+<type>Wind</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect]], true);
+]]>
+</init>
+</move>
+
+<move name="Thunder" id="88">
+<type>Wind</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.70</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+/**
+  * TODO: WARNING! Mechanics MADE UP by me here.
+  */
+makeStatusMove(this, [[ParalysisEffect, 0.3]]);
+var accuracy_ = this.accuracy;
+this.attemptHit = function(field, user, target) {
+    this.accuracy = accuracy_;
+    var flags = getGlobalController(field).getFlags();
+    if (flags[GlobalEffect.RAIN]) {
+        this.accuracy = 0;
+        // TODO: maybe apply effect for x0 instead...
+    } else if (flags[GlobalEffect.SUN]) {
+        this.accuracy = 0.50;
+    }
+    return field.attemptHit(this, user, target);
+};
+]]>
+</init>
+</move>
+
+<move name="Rock Slide" id="89">
+<type>Earth</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Earthquake" id="90">
+<type>Earth</type>
+<class>Physical</class>
+<power>100</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Others</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+this.power_ = this.power;
+]]>
+</init>
+<use>
+<![CDATA[
+this.power = this.power_;
+var effect = target.getStatus("ChargeMoveEffect");
+if (effect && (effect.move.name == "Dig")) {
+    this.power *= 2;
+}
+target.hp -= field.calculate(this, user, target, targets);
+]]>
+</use>
+</move>
+
+<move name="Fissure" id="91">
+<type>Earth</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>0.30</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeOneHitKillMove(this);
+]]>
+</init>
+</move>
+
+<move name="Dig" id="92">
+<type>Earth</type>
+<class>Physical</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeChargeMove(this,
+        Text.battle_messages_charge.wrap(4),
+        ["Earthquake", "Magnitude"]);
+]]>
+</init>
+</move>
+
+<move name="Toxic" id="93">
+<type>Miasma</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.85</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ToxicEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Psyshot" id="94">
+<type>Reason</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ConfusionEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Mana Burst" id="95">
+<type>Reason</type>
+<class>Special</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -1), 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Hypnosis" id="96">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.60</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[SleepEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Zen Headbutt" id="97">
+<type>Reason</type>
+<class>Physical</class>
+<power>80</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Agility" id="98">
+<type>Flying</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.SPEED, 2));
+]]>
+</use>
+</move>
+
+<move name="Quick Attack" id="99">
+<type>Flying</type>
+<class>Physical</class>
+<priority>1</priority>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Rage" id="100">
+<type>Dark</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>User</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+makeStatusMove(this, [[new BurnEffect, 0.7, true]]);
+]]>
+</use>
+</move>
+
+<move name="Teleport" id="101">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+</flags>
+<use>
+<![CDATA[
+field.print(Text.battle_messages(0));
+]]>
+</use>
+</move>
+
+<move name="Night Shade" id="102">
+<type>Ghost</type>
+<class>Special</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+if (target.isImmune(this)) {
+    field.print(Text.battle_messages(1, target));
+    return;
+}
+target.hp -= user.level;
+]]>
+</use>
+</move>
+
+<move name="Mimic" id="103">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+</flags>
+<init>
+<![CDATA[
+this.forbidden_ = ["Metronome", "Struggle", "Sketch", "Mimic"];
+]]>
+</init>
+<use>
+<![CDATA[
+var move = target.lastMove;
+if (user.getStatus("TransformEffect") || !move
+        || (this.forbidden_.indexOf(move.name) != -1)
+        || (user.getPp(move) != -1)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var id_ = user.getMoveId(this);
+var original_ = user.getMove(id_);
+var pp_ = user.getPp(original_);
+var maxPp_ = user.getMaxPp(original_);
+var effect = new StatusEffect("MimicEffect");
+effect.unapplyEffect = function() {
+    this.subject.setMove(id_, original_, pp_, maxPp_);
+};
+user.applyStatus(user, effect);
+user.setMove(id_, move, 5, 5);
+field.print(Text.battle_messages_unique(37, user, move));
+]]>
+</use>
+</move>
+
+<move name="Screech" id="104">
+<type>Ghost</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.90</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, -2)]]);
+]]>
+</init>
+</move>
+
+<move name="Shadow Hit" id="105">
+<type>Ghost</type>
+<class>Physical</class>
+<power>70</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Recover" id="106">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+makeRecoveryMove(this);
+]]>
+</init>
+</move>
+
+<move name="Harden" id="107">
+<type>Steel</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.DEFENCE, 1));
+user.applyStatus(user, new StatusEffect("MomentumBoostEffect"));
+]]>
+</use>
+</move>
+
+<move name="Minimize" id="108">
+<type>Earth</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+this.isEvasionMove_ = true;
+</init>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.EVASION, 1));
+var effect = new StatusEffect("MinimiseEffect");
+user.applyStatus(user, effect);
+]]>
+</use>
+</move>
+
+<move name="Smokescreen" id="109">
+<type>Fire</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ACCURACY, -1)]]);
+]]>
+</init>
+</move>
+
+<move name="Confuse Ray" id="110">
+<type>Ghost</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ConfusionEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Withdraw" id="111">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>40</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.SPDEFENCE, 1));
+]]>
+</use>
+</move>
+
+<move name="Defense Curl" id="112">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.DEFENCE, 1));
+user.applyStatus(user, new StatusEffect("MomentumBoostEffect"));
+]]>
+</use>
+</move>
+
+<move name="Barrier" id="113">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.DEFENCE, 2));
+]]>
+</use>
+</move>
+
+<move name="Light Screen" id="114">
+<type>Faith</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>Allies</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+makePartyBuffMove(this, MoveClass.SPECIAL);
+]]>
+</init>
+</move>
+
+<move name="Haze" id="115">
+<type>Ice</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>All</target>
+<flags>
+
+</flags>
+<!--
+    TODO: This move might have a message in prepareSelf.
+-->
+<use>
+<![CDATA[
+var effect = null;
+while (effect = target.getStatus("StatChangeEffect")) {
+    target.removeStatus(effect);
+}
+]]>
+</use>
+</move>
+
+<move name="Reflect" id="116">
+<type>Dream</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Allies</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+makePartyBuffMove(this, MoveClass.PHYSICAL);
+]]>
+</init>
+</move>
+
+<move name="Focus Energy" id="117">
+<type>Dream</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+if (user.getStatus("HighCriticalEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var effect = new StatusEffect("HighCriticalEffect");
+effect.name = Text.battle_messages_unique(63);
+effect.criticalModifier = function() {
+    return 2;
+};
+user.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(64, user));
+]]>
+</use>
+</move>
+
+<move name="Guard" id="118">
+<type>Dream</type>
+<class>Other</class>
+<priority>3</priority>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <unimplemented/>
+</flags>
+<use>
+<![CDATA[
+
+]]>
+</use>
+</move>
+
+<move name="Metronome" id="119">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>None</target>
+<flags>
+
+</flags>
+<use>
+<![CDATA[
+var forbidden = ["Metronome", "Struggle", "Sketch", "Mimic", 
+                 "Sleep Talk", "Assist", "Mirror Move", "Counter",
+                 "Mirror Coat", "Detect", "Endure", "Destiny Bond",
+                 "Thief", "Guard", "Snatch", "Helping Hand", "Wanting",
+                 "Trick", "Focus Punch"];
+for (var i = 0; i < user.moveCount; ++i) {
+    var move = user.getMove(i);
+    forbidden.push(move.name);
+}
+var length = field.getMoveCount();
+var move = null;
+while (!move || (forbidden.indexOf(move.name) != -1)
+        || move.flags[Flag.INTERNAL]) {
+    move = field.getMove(field.random(0, length - 1));
+}
+user.execute(move);
+]]>
+</use>
+</move>
+
+<move name="False Swipe" id="120">
+<type>Illusion</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>40</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+var damage = field.calculate(this, user, target, targets);
+if (damage >= target.hp) {
+    target.hp = 1;
+} else {
+    target.hp -= damage;
+}
+]]>
+</use>
+</move>
+
+<move name="Selfdestruct" id="121">
+<type>Illusion</type>
+<class>Physical</class>
+<power>200</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Others</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeExplosionMove(this);
+]]>
+</init>
+</move>
+
+<move name="Mind Bomb" id="122">
+<type>Heart</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMassBasedMove(this);
+]]>
+</init>
+</move>
+
+<move name="Lick" id="123">
+<type>Ghost</type>
+<class>Physical</class>
+<power>30</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Toxic Gas" id="124">
+<type>Miasma</type>
+<class>Special</class>
+<power>65</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[PoisonEffect, 0.4]]);
+]]>
+</init>
+</move>
+
+<move name="Poison Bomb" id="125">
+<type>Miasma</type>
+<class>Special</class>
+<power>95</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[PoisonEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Bone Club" id="126">
+<type>Faith</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Fire Blast" id="127">
+<type>Fire</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[BurnEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Waterfall" id="128">
+<type>Water</type>
+<class>Physical</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Mana Shield" id="129">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>40</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.SPDEFENCE, 1));
+]]>
+</use>
+</move>
+
+<move name="Swift" id="130">
+<type>Illusion</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Enemies</target>
+<flags>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Skull Bash" id="131">
+<type>Steel</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeChargeMove(this, Text.battle_messages_charge.wrap(2));
+this.additional = function(user) {
+    // Additional effect on charge turn: +1 defence.
+    user.applyStatus(user, new StatChangeEffect(Stat.DEFENCE, 1));
+};
+]]>
+</init>
+</move>
+
+<move name="Feint" id="132">
+<type>Illusion</type>
+<class>Physical</class>
+<priority>2</priority>
+<power>30</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Constrict" id="133">
+<type>Nature</type>
+<class>Physical</class>
+<power>30</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Amnesia" id="134">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.SPDEFENCE, 2));
+]]>
+</use>
+</move>
+
+<move name="Sakuya's World" id="135">
+<type>Ice</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>0.55</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FreezeEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Softboiled" id="136">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+makeRecoveryMove(this);
+]]>
+</init>
+</move>
+
+<move name="High Jump Kick" id="137">
+<type>Dream</type>
+<class>Physical</class>
+<power>110</power>
+<accuracy>0.90</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeJumpKickMove(this);
+]]>
+</init>
+</move>
+
+<move name="Coerce" id="138">
+<type>Dark</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+var move = target.lastMove;
+var pp = -1;
+if (!move || ((pp = target.getPp(move)) == 0)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+const PP_LOSS = (field.random(0, 3) + 2);
+target.setPp(move, pp - PP_LOSS);
+field.print(Text.battle_messages_unique(60, target, move, PP_LOSS));
+]]>
+</use>
+</move>
+
+<move name="Dream Eater" id="139">
+<type>Dark</type>
+<class>Special</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, -2);
+]]>
+</init>
+</move>
+
+<move name="Ominous Wind" id="140">
+<type>Ghost</type>
+<class>Special</class>
+<power>70</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeAllStatBoostMove(this);
+]]>
+</init>
+</move>
+
+<move name="Barrage" id="141">
+<type>Faith</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeTwoHitMove(this);
+]]>
+</init>
+</move>
+
+<move name="Leech Life" id="142">
+<type>Dark</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, -2);
+]]>
+</init>
+</move>
+
+<move name="Lovely Kiss" id="143">
+<type>Dark</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.70</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[SleepEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Sky Attack" id="144">
+<type>Flying</type>
+<class>Physical</class>
+<power>160</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <high-critical/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.8]]);
+makeChargeMove(this, Text.battle_messages_charge.wrap(3));
+]]>
+</init>
+</move>
+
+<move name="Transform" id="145">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <unimplemented/>
+</flags>
+<use>
+<![CDATA[
+
+]]>
+</use>
+</move>
+
+<move name="Bubble" id="146">
+<type>Water</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPEED, -1), 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Dizzy Punch" id="147">
+<type>Heart</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ConfusionEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Burn Powder" id="148">
+<type>Nature</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.75</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[BurnEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Flash" id="149">
+<type>Faith</type>
+<class>Special</class>
+<power>65</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ACCURACY, -1), 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Psywave" id="150">
+<type>Reason</type>
+<class>Special</class>
+<power>1</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+if (target.isImmune(this)) {
+    field.print(Text.battle_messages(1, target));
+    return;
+}
+var damage = Math.floor(user.level * (field.random(0, 10) * 10 + 50) / 100);
+target.hp -= damage;
+]]>
+</use>
+</move>
+
+<move name="Splash" id="151">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>40</pp>
+<target>User</target>
+<flags>
+
+</flags>
+<use>
+<![CDATA[
+field.print(Text.battle_messages_unique(2));
+]]>
+</use>
+</move>
+
+<move name="Proletariat" id="152">
+<type>Miasma</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>40</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.DEFENCE, 2));
+]]>
+</use>
+</move>
+
+<move name="Aqua Jet" id="153">
+<type>Water</type>
+<class>Physical</class>
+<priority>1</priority>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Explosion" id="154">
+<type>Illusion</type>
+<class>Physical</class>
+<power>250</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Others</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeExplosionMove(this);
+]]>
+</init>
+</move>
+
+<move name="Fury Swipes" id="155">
+<type>Beast</type>
+<class>Physical</class>
+<power>25</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMultipleHitMove(this);
+]]>
+</init>
+</move>
+
+<move name="Bonemerang" id="156">
+<type>Earth</type>
+<class>Physical</class>
+<power>50</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeTwoHitMove(this);
+]]>
+</init>
+</move>
+
+<move name="Rest" id="157">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+var max = user.getStat(Stat.HP);
+if (user.getStatus("SleepEffect") || (user.hp == max)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var status = user.getStatus(StatusEffect.SPECIAL_EFFECT);
+var effect = new SleepEffect();
+effect.lock = 0;
+if (status) {
+    effect.text_ = Text.battle_messages_unique.wrap(5);
+}
+effect = user.applyStatus(user, effect);
+if (!effect) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+effect.lock = StatusEffect.SPECIAL_EFFECT;
+effect.turns = 2;
+if (status) {
+    user.removeStatus(status);
+}
+user.hp = max;
+]]>
+</use>
+</move>
+
+<move name="Rock Wrecker" id="158">
+<type>Earth</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, 1), 0.2, true]]);
+]]>
+</init>
+</move>
+
+<move name="Killing Bite" id="159">
+<type>Beast</type>
+<class>Physical</class>
+<power>100</power>
+<accuracy>0.80</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Sharpen" id="160">
+<type>Steel</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.ATTACK, 1));
+]]>
+</use>
+</move>
+
+<move name="Conversion" id="161">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>30</pp>
+<target>User</target>
+<flags>
+
+</flags>
+<use>
+<![CDATA[
+var choices = [];
+for (var i = 0; i < user.moveCount; ++i) {
+    var move = user.getMove(i);
+    var type = move.type;
+    if ((type != Type.TYPELESS) && !user.isType(type)) {
+        choices.push(type);
+    }
+}
+var length = choices.length;
+if (length == 0) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var choice = choices[field.random(0, length - 1)];
+user.setTypes([choice]);
+field.print(Text.battle_messages_unique(9, user, Text.types(choice)));
+]]>
+</use>
+</move>
+
+<move name="Tri-Attack" id="162">
+<type>Heart</type>
+<class>Special</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+var effect = function(field) {
+    var rand = field.random(1, 3);
+    if (rand == 1) return BurnEffect;
+    if (rand == 2) return FreezeEffect;
+    return ParalysisEffect;
+};
+effect.delayed = true;
+makeStatusMove(this, [[effect, 0.20]]);
+]]>
+</init>
+</move>
+
+<move name="Heat Claw" id="163">
+<type>Beast</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMassBasedMove(this);
+]]>
+</init>
+</move>
+
+<move name="Slash" id="164">
+<type>Beast</type>
+<class>Physical</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Substitute" id="165">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+this.forbidden_ = ["Block", "Jamming", "Leech Seed", "Mean Look", "Mimic",
+                   "Pain Split", "Sketch", "Trick", "Swagger", "Yawn"];
+]]>
+</init>
+<use>
+<![CDATA[
+var hp = Math.floor(user.getStat(Stat.HP) / 4);
+if (user.getStatus("SubstituteEffect") || (user.hp <= hp)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+user.hp -= hp;
+var effect = new StatusEffect("SubstituteEffect");
+effect.name = Text.battle_messages_unique(133);
+effect.hp_ = effect.max_ = hp;
+effect.getEffectiveHp = function() {
+    return [this.hp_, this.max_];
+};
+effect.takeDamage = function(delta) {
+    this.hp_ -= delta;
+    field.print(Text.battle_messages_unique(135, this.subject));
+    if (this.hp_ > 0)
+        return false;
+    this.hp_ = 0;
+    field.print(Text.battle_messages_unique(136, this.subject));
+    return true;
+};
+effect.transformHealthChange = function(delta, user, indirect) {
+    if ((this.hp_ == 0) || indirect || (delta < 0))
+        return delta;
+    if (this.takeDamage(delta)) {
+        var this_ = this;
+        var effect_ = new StatusEffect("SubstituteUnapplyEffect");
+        effect_.singleton = false;
+        effect_.informFinishedSubjectExecution = function() {
+            this_.subject.removeStatus(this_);
+            this.subject.removeStatus(this);
+        };
+        user.applyStatus(user, effect_);
+    }
+    return 0;
+};
+var forbidden_ = this.forbidden_;
+effect.vetoExecution = function(field, user, target, move) {
+    if (target != this.subject)
+        return false;
+    if (forbidden_.indexOf(move.name) == -1)
+        return false;
+    field.print(Text.battle_messages(0));
+    return true;
+};
+effect.transformStatus = function(subject, effect) {
+    if (subject != this.subject)
+        return effect;
+    if (effect.inducer == subject)
+        return effect;
+    if (effect.piercesub == true)
+        return effect;
+    if (effect.lock == StatusEffect.SPECIAL_EFFECT)
+        return null;
+    if (effect.id == "ConfusionEffect")
+        return null;
+    if (effect.id == "FlinchEffect")
+        return null;
+    if (effect.id != "StatChangeEffect")
+        return effect;
+    if (effect.delta_ > 0)
+        return effect;
+    return null;
+};
+effect.informRemoveItem = function() {
+    return true;
+};
+user.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(134, user));
+]]>
+</use>
+</move>
+
+<move name="Struggle" id="166">
+<type>Illusion</type>
+<class>Physical</class>
+<power>50</power>
+<accuracy>0</accuracy>
+<pp>1</pp>
+<target>Randenemy</target>
+<flags>
+    <contact/>
+    <protect/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+var type_ = this.type;
+this.type = Type.TYPELESS;
+var damage_ = field.calculate(this, user, target, targets);
+target.hp -= damage_
+this.type = type_;
+
+var recoil = (damage_ / 2);
+if (recoil < 1) recoil = 1;
+user.hp -= recoil;
+]]>
+</use>
+</move>
+
+<move name="Sketch" id="167">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>1</pp>
+<target>Non-user</target>
+<flags>
+    <unimplemented/>
+</flags>
+<use>
+<![CDATA[
+
+]]>
+</use>
+</move>
+
+<move name="Triple Kick" id="168">
+<type>Dream</type>
+<class>Physical</class>
+<power>10</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+this.power_ = this.power;
+]]>
+</init>
+<attemptHit>
+<![CDATA[
+return true;
+]]>
+</attemptHit>
+<use>
+<![CDATA[
+var i = 0;
+for (; i < 3; ++i) {
+    if (target.fainted)
+        break;
+    if (!field.attemptHit(this, user, target)) {
+        field.print(Text.battle_messages(2, user, target));
+        break;
+    }
+    this.power = this.power_ * (i + 1);
+    target.hp -= field.calculate(this, user, target, targets);
+}
+field.print(Text.battle_messages_unique(0, i));
+]]>
+</use>
+</move>
+
+<move name="Thief" id="169">
+<type>Dark</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeThiefMove(this);
+]]>
+</init>
+</move>
+
+<move name="Spider Web" id="170">
+<type>Nature</type>
+<class>Special</class>
+<power>50</power>
+<accuracy>0.80</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Heart's Eye" id="171">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.85</accuracy>
+<pp>40</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -2)]]);
+]]>
+</init>
+</move>
+
+<move name="Nightmare" id="172">
+<type>Ghost</type>
+<class>Special</class>
+<power>70</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[SleepEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Flame Wheel" id="173">
+<type>Fire</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[BurnEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Snore" id="174">
+<type>Dream</type>
+<class>Special</class>
+<power>70</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.3]]);
+var parent = this.use;
+this.use = function(field, user, target, targets) {
+    if (user.getStatus("SleepEffect") == null) {
+        field.print(Text.battle_messages(0));
+        return;
+    }
+    parent.call(this, field, user, target, targets);
+};
+]]>
+</init>
+</move>
+
+<move name="Curse" id="175">
+<type>Typeless</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<!--
+    Note: Curse always has single non-user target for the purpose of failure
+          due to lack of a target. However, when selecting a move, Curse
+          appears to be user target if the user's type does not include Ghost;
+          in fact, a random target is silently chosen from among the available
+          enemies.
+-->
+<target>Non-user</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ATTACK, 1), 1.0, true],
+                      [new StatChangeEffect(Stat.DEFENCE, 1), 1.0, true],
+                      [new StatChangeEffect(Stat.SPEED, -1), 1.0, true]]);
+var parent = this.use;
+this.use = function(field, user, target, targets) {
+    if (!user.isType(Type.GHOST)) {
+        parent.call(this, field, user, target, targets);
+        return;
+    }
+    if (target.getStatus("CurseEffect")
+            || target.getStatus("SubstituteEffect")) {
+        field.print(Text.battle_messages(0));
+        return;
+    }
+    var effect = new StatusEffect("CurseEffect");
+    effect.name = Text.battle_messages_unique(88);
+    effect.tier = 6;
+    effect.subtier = 6;
+    effect.tick = function() {
+        field.print(Text.battle_messages_unique(90, this.subject));
+        this.subject.hp -= Math.floor(this.subject.getStat(Stat.HP) / 4);
+    };
+    target.applyStatus(user, effect);
+    field.print(Text.battle_messages_unique(89, user, target));
+    user.hp -= Math.floor(user.getStat(Stat.HP) / 2);
+};
+]]>
+</init>
+</move>
+
+<move name="Flail" id="176">
+<type>Illusion</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeUserLowHealthMove(this);
+]]>
+</init>
+</move>
+
+<move name="Conversion 2" id="177">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>User</target>
+<flags>
+
+</flags>
+<use>
+<![CDATA[
+var move = user.memory;
+if (!move) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var type = move.type;
+var choices = [];
+for (var idx in Type) {
+    var i = Type[idx];
+    if (field.getTypeEffectiveness(type, i) < 1.0) {
+        choices.push(i);
+    }
+}
+var length = choices.length;
+if (length == 0) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var choice = choices[field.random(0, length - 1)];
+user.setTypes([choice]);
+field.print(Text.battle_messages_unique(9, user, Text.types(choice)));
+]]>
+</use>
+</move>
+
+<move name="Aeroblast" id="178">
+<type>Wind</type>
+<class>Special</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Cotton Spore" id="179">
+<type>Nature</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>40</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPEED, -2)]]);
+]]>
+</init>
+</move>
+
+<move name="Reversal" id="180">
+<type>Dream</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeUserLowHealthMove(this);
+]]>
+</init>
+</move>
+
+<move name="Spite" id="181">
+<type>Ghost</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+var move = target.lastMove;
+var pp = -1;
+if (!move || ((pp = target.getPp(move)) == 0)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+const PP_LOSS = (field.random(0, 3) + 2);
+target.setPp(move, pp - PP_LOSS);
+field.print(Text.battle_messages_unique(60, target, move, PP_LOSS));
+]]>
+</use>
+</move>
+
+<move name="Powder Snow" id="182">
+<type>Ice</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FreezeEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Protect" id="183">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [
+        [new StatChangeEffect(Stat.DEFENCE, 1), 1, true],
+        [new StatChangeEffect(Stat.SPDEFENCE, 1), 1, true]
+    ]);
+]]>
+</init>
+</move>
+
+<move name="Mach Punch" id="184">
+<type>Dream</type>
+<class>Physical</class>
+<priority>1</priority>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Scary Face" id="185">
+<type>Dark</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPEED, -2)]]);
+]]>
+</init>
+</move>
+
+<move name="Faint Attack" id="186">
+<type>Dark</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+</move>
+
+<move name="Sweet Kiss" id="187">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ConfusionEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Belly Drum" id="188">
+<type>Dream</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+var delta = Math.floor(user.getStat(Stat.HP) / 2);
+if ((delta >= user.hp) || (user.getStatLevel(Stat.ATTACK) == 6)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+user.hp -= delta;
+var effect = new StatChangeEffect(Stat.ATTACK, (6 - user.getStatLevel(Stat.ATTACK)));
+effect.silent = true;
+user.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(159, user));
+]]>
+</use>
+</move>
+
+<move name="Gunk Shot" id="189">
+<type>Miasma</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.75</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[PoisonEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Mud Shot" id="190">
+<type>Earth</type>
+<class>Special</class>
+<power>65</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ACCURACY, -1), 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Black Ripple" id="191">
+<type>Dark</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Spikes" id="192">
+<type>Earth</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Enemyfield</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+makeEntryHazardMove(this, EntryHazard.SPIKES);
+]]>
+</init>
+</move>
+
+<move name="Energy Ball" id="193">
+<type>Dream</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.75</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -1), 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Foresight" id="194">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>40</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeForesightMove(this, [Type.ILLUSION, Type.DARK]);
+]]>
+</init>
+</move>
+
+<move name="Destiny Bond" id="195">
+<type>Ghost</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>5</pp>
+<target>User</target>
+<flags>
+
+</flags>
+<use>
+<![CDATA[
+var effect = user.getStatus("DestinyBondEffect");
+if (effect) {
+    user.removeStatus(effect);
+}
+effect = new StatusEffect("DestinyBondEffect");
+effect.turns_ = 2;
+effect.informDamaged = function(user, move, damage) {
+    var subject = this.subject;
+    if ((subject.hp <= 0) && (damage > 0) && (user.party != subject.party)) {
+        field.print(Text.battle_messages_unique(62, subject, user));
+        user.faint();
+    }
+};
+effect.informFinishedSubjectExecution = function() {
+    if (--this.turns_ == 0) {
+        this.subject.removeStatus(this);
+    }
+};
+user.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(61, user));
+]]>
+</use>
+</move>
+
+<move name="Perish Song" id="196">
+<type>Ghost</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>5</pp>
+<target>All</target>
+<flags>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+this.prepareSelf = function(field) {
+    field.print(Text.battle_messages_unique(50));
+};
+]]>
+</init>
+<use>
+<![CDATA[
+if (target.getStatus("PerishSongEffect")) {
+    return;
+}
+var effect = new StatusEffect("PerishSongEffect");
+effect.name = Text.battle_messages_unique(49);
+effect.turns = 4;
+effect.tier = 8;
+effect.subtier = 0;
+effect.tick = function() {
+    --this.turns;
+    this.subject.field.print(Text.battle_messages_unique(
+            51, this.subject, this.turns));
+    if (this.turns > 0)
+        return;
+    this.subject.faint();
+};
+target.applyStatus(user, effect);
+]]>
+</use>
+</move>
+
+<move name="Icy Wind" id="197">
+<type>Ice</type>
+<class>Special</class>
+<power>55</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPEED, -1), 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Detect" id="198">
+<type>Dream</type>
+<class>Other</class>
+<priority>3</priority>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+makeProtectMove(this);
+]]>
+</init>
+</move>
+
+<move name="Bone Rush" id="199">
+<type>Earth</type>
+<class>Physical</class>
+<power>25</power>
+<accuracy>0.80</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMultipleHitMove(this);
+]]>
+</init>
+</move>
+
+<move name="Lock-On" id="200">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>15</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.ACCURACY, 2));
+]]>
+</use>
+</move>
+
+<move name="Outrage" id="201">
+<type>Dark</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Sandstorm" id="202">
+<type>Earth</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>All</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+makeWeatherMove(this, GlobalEffect.SAND);
+]]>
+</init>
+</move>
+
+<move name="Giga Drain" id="203">
+<type>Nature</type>
+<class>Special</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, -2);
+]]>
+</init>
+</move>
+
+<move name="Endure" id="204">
+<type>Dream</type>
+<class>Other</class>
+<priority>3</priority>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+makeProtectTypeMove(this, function(field, user) {
+    var effect = new StatusEffect("EndureEffect");
+    effect.tier = 0;
+    effect.tick = function() {
+        this.subject.removeStatus(this);
+    };
+    effect.transformHealthChange = function(delta, user, indirect) {
+        if (indirect || (delta < 0))
+            return delta;
+        var effect = this.subject.getStatus("SubstituteEffect");
+        if (effect && (effect.hp_ != 0))
+            return delta;
+        if (this.subject.hp > delta)
+            return delta;
+        field.print(Text.battle_messages_unique(150, this.subject));
+        return this.subject.hp - 1;
+    };
+    user.applyStatus(user, effect);
+    field.print(Text.battle_messages_unique(149, user));
+});
+]]>
+</init>
+</move>
+
+<move name="Smile" id="205">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ATTACK, -2)]]);
+]]>
+</init>
+</move>
+
+<move name="Tremors" id="206">
+<type>Earth</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>0.90</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMomentumMove(this);
+]]>
+</init>
+</move>
+
+<move name="Draw The Line" id="207">
+<type>Steel</type>
+<class>Physical</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Swagger" id="208">
+<type>Dark</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this,
+        [[ConfusionEffect], [new StatChangeEffect(Stat.ATTACK, 2)]]
+    );
+]]>
+</init>
+</move>
+
+<move name="Milk Drink" id="209">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+makeRecoveryMove(this);
+]]>
+</init>
+</move>
+
+<move name="Discharge" id="210">
+<type>Wind</type>
+<class>Special</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Fury Cutter" id="211">
+<type>Steel</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>0.90</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMomentumMove(this);
+]]>
+</init>
+</move>
+
+<move name="Steel Wing" id="212">
+<type>Steel</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, 1), 0.1, true]]);
+]]>
+</init>
+</move>
+
+<move name="Charming Look" id="213">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+if (target.getStatus("TauntEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var effect = new StatusEffect("TauntEffect");
+effect.name = Text.battle_messages_unique(29);
+effect.turns = 2;
+effect.tier = 0;
+effect.vetoTier = 7;
+effect.applyEffect = function() {
+    field.print(Text.battle_messages_unique(28, this.subject));
+    return true;
+};
+effect.tick = function() {
+    if (--this.turns <= 0) {
+        //field.print(Text.battle_messages_unique(26, this.subject));
+        this.subject.removeStatus(this);
+    }
+};
+effect.vetoSelection = function(user, move) {
+    if (user != this.subject)
+        return false;
+    return (move.moveClass == MoveClass.OTHER);
+};
+effect.vetoExecution = function(field, user, target, move) {
+    if (target != null)
+        return false;
+    if (user != this.subject)
+        return false;
+    if (move.moveClass != MoveClass.OTHER)
+        return false;
+    field.print(Text.battle_messages_unique(27, this.subject, move));
+    return true;
+};
+target.applyStatus(user, effect);
+]]>
+</use>
+</move>
+
+<move name="Attract" id="214">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+if (target.getStatus("AttractEffect") || !isOppositeGender(user, target)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+target.applyStatus(user, new AttractEffect());
+]]>
+</use>
+</move>
+
+<move name="Sleep Talk" id="215">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>None</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+this.forbidden_ = ["Assist", "Bide", "Focus Punch", "Metronome", "Mirror Move", "Sleep Talk",
+                   "Uproar", "Skull Bash", "Sky Attack", "Solarbeam", "Fly", "Dig", "Shadow Dive", "Bounce"];
+]]>
+</init>
+<use>
+<![CDATA[
+if (!user.getStatus("SleepEffect") || user.getStatus("EncoreEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var choices = [];
+for (var i = 0; i < user.moveCount; ++i) {
+    var move = user.getMove(i);
+    if ((user.getPp(move) > 0) && (this.forbidden_.indexOf(move.name) == -1)
+            && user.isSelectable(move)) {
+        choices.push(move);
+    }
+}
+var length = choices.length;
+if (length == 0) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var move = choices[field.random(0, length - 1)];
+user.execute(move);
+]]>
+</use>
+</move>
+
+<move name="Heal Bell" id="216">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>5</pp>
+<target>Allies</target>
+<flags>
+    <snatch/>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+makeStatusCureMove(this);
+]]>
+</init>
+</move>
+
+<move name="Return" id="217">
+<type>Illusion</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+this.prepareSelf = function(field, user) {
+    this.power = Math.floor(user.happiness * 2 / 5);
+};
+]]>
+</init>
+</move>
+
+<move name="Prank" id="218">
+<type>Dark</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+if (target.isImmune(this)) {
+    field.print(Text.battle_messages(1, target));
+    return;
+}
+var damage = target.hp / 2;
+target.hp -= damage;
+]]>
+</use>
+</move>
+
+<move name="Frustration" id="219">
+<type>Illusion</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+this.prepareSelf = function(field, user) {
+    this.power = Math.floor((255 - user.happiness) * 2 / 5);
+};
+]]>
+</init>
+</move>
+
+<move name="Safeguard" id="220">
+<type>Faith</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>25</pp>
+<target>Allies</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+this.prepareSelf = function(field, user) {
+    if (user.getStatus("SafeguardEffect")) {
+        field.print(Text.battle_messages(0));
+        return;
+    }
+    var effect = new StatusEffect("SafeguardEffect");
+    effect.name = Text.battle_messages_unique(109);
+    effect.radius = StatusEffect.RADIUS_USER_PARTY;
+    effect.turns = 5;
+    var party_ = user.party;
+    effect.applyEffect = function() {
+        return (this.subject.party == party_);
+    };
+    effect.beginTick = function() {
+        if (--this.turns != 0)
+            return;
+        // TODO: Reference trainer name in the message.
+        field.print(Text.battle_messages_unique(111, this.subject));
+        field.removeStatus(this);
+    };
+    effect.transformStatus = function(subject, status) {
+        if (subject.party != party_)
+            return status;
+        if (status.inducer == subject)
+            return status;
+        if ((status.lock != StatusEffect.SPECIAL_EFFECT)
+                && (status.id != "ConfusionEffect"))
+            return status;
+        return null;
+    };
+    effect.vetoExecution = function(field, user, target, move) {
+        if (!target || (target.party != party_))
+            return false;
+        if (move.name != "Yawn")
+            return false;
+        field.print(Text.battle_messages(0));
+        return true;
+    };
+    field.print(Text.battle_messages_unique(110, user));
+    field.applyStatus(effect);
+};
+this.use = function() {
+    // Does nothing.
+};
+]]>
+</init>
+</move>
+
+<move name="Pain Split" id="221">
+<type>Ghost</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+var hp = Math.floor((target.hp + user.hp) / 2);
+user.hp = hp;
+target.hp = hp;
+]]>
+</use>
+</move>
+
+<move name="Sacred Fire" id="222">
+<type>Faith</type>
+<class>Physical</class>
+<power>100</power>
+<accuracy>0.85</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ATTACK, 1), 0.2, true]]);
+]]>
+</init>
+</move>
+
+<move name="Magnitude" id="223">
+<type>Earth</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Others</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+this.prepareSelf = function(field, user) {
+    var magnitude;
+    var rand = field.random(0, 100);
+    if (rand < 5) {
+        this.power_ = 10;
+        magnitude = 4;
+    } else if (rand < 15) {
+        this.power_ = 30;
+        magnitude = 5;
+    } else if (rand < 35) {
+        this.power_ = 50;
+        magnitude = 6;
+    } else if (rand < 65) {
+        this.power_ = 70;
+        magnitude = 7;
+    } else if (rand < 85) {
+        this.power_ = 90;
+        magnitude = 8;
+    } else if (rand < 95) {
+        this.power_ = 110;
+        magnitude = 9;
+    } else {
+        this.power_ = 150;
+        magnitude = 10;
+    }
+    field.print(Text.battle_messages_unique(14, magnitude));
+};
+]]>
+</init>
+<use>
+<![CDATA[
+this.power = this.power_;
+var effect = target.getStatus("ChargeMoveEffect");
+if (effect && (effect.move.name == "Dig")) {
+    this.power *= 2;
+}
+target.hp -= field.calculate(this, user, target, targets);
+]]>
+</use>
+</move>
+
+<move name="Dynamicpunch" id="224">
+<type>Dream</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ConfusionEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Brave Bird" id="225">
+<type>Flying</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, 3);
+]]>
+</init>
+</move>
+
+<move name="Lava Plume" id="226">
+<type>Fire</type>
+<class>Special</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[BurnEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Baton Pass" id="227">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>40</pp>
+<target>User</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+this.effects_ = ["AquaRingEffect", "TrappingEffect", "ConfusionEffect",
+                 "CurseEffect", "EmbargoEffect", "HighCriticalEffect",
+                 "GastroAcidEffect", "IngrainEffect", "LeechSeedEffect",
+                 "LockOnEffect", "MagnetRiseEffect", "PerishSongEffect",
+                 "PowerTrickEffect", "SubstituteEffect"];
+]]>
+</init>
+<use>
+<![CDATA[
+var selection = field.requestInactivePokemon(user);
+if (!selection) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+for (var i = 0; i <= Stat.EVASION; ++i) {
+    var level = user.getStatLevel(i);
+    if (level != 0) {
+        var effect = new StatChangeEffect(i, level);
+        effect.silent = true;
+        selection.applyStatus(selection, effect);
+    }
+}
+this.effects_.forEach(function(i) {
+    var effect = user.getStatus(i);
+    if (effect) {
+        field.narration = false;
+        selection.applyStatus(selection, effect);
+        field.narration = true;
+    }
+});
+var slot = user.position;
+user.switchOut();
+selection.sendOut(slot);
+]]>
+</use>
+</move>
+
+<move name="Encore" id="228">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+this.forbidden_ = ["Transform", "Mimic", "Sketch", "Mirror Move", "Encore",
+                   "Struggle"];
+]]>
+</init>
+<use>
+<![CDATA[
+if (target.getStatus("EncoreEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var move = target.lastMove;
+if (!move || (this.forbidden_.indexOf(move.name) != -1)
+        || (target.getPp(move) <= 0)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var effect = new StatusEffect("EncoreEffect");
+effect.name = Text.battle_messages_unique(154);
+effect.tier = 0;
+effect.move_ = move;
+var id_ = target.getMoveId(move)
+effect.turns_ = field.random(4, 8);
+effect.choice_ = !target.forcedMove;
+effect.informBeginExecution = function() {
+    var turn = this.subject.turn;
+    if (this.subject.isSelectable(this.move_)) {
+        turn.move = id_;
+    } else {
+        turn.move = -1;
+        this.subject.setForcedMove(field.getMove("Struggle"), null, true);
+    }
+    turn.target = -1;
+};
+var this_ = this;
+effect.informFinishedSubjectExecution = function(move) {
+    if (this.choice_ && this.subject.lastMove) {
+        this.subject.setPp(move, this.subject.getPp(move) - 1);
+    }
+    var move_ = this.subject.getMove(id_);
+    if (!move_ || (this.subject.getPp(move_) <= 0)
+            || (this.move_.name != move_.name)) {
+        this.subject.removeStatus(this);
+        return;
+    }
+    if ((this.turns_ > 1) && (this.choice_ = !this.subject.forcedTurn)) {
+        this.subject.setForcedMove(this_, null, true);
+    }
+};
+effect.informWithdraw = function(subject) {
+    if (subject == this.subject) {
+        subject.removeStatus(this);
+    }
+};
+effect.tick = function() {
+    if (--this.turns_ == 0) {
+        field.print(Text.battle_messages_unique(156, this.subject));
+        this.subject.removeStatus(this);
+    }
+};
+target.applyStatus(user, effect);
+target.setForcedMove(this, null, true);
+field.print(Text.battle_messages_unique(155, target));
+]]>
+</use>
+</move>
+
+<move name="Pursuit" id="229">
+<type>Dark</type>
+<class>Physical</class>
+<power>50</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+this.power_ = this.power;
+var move = this;
+this.beginTurn = function(field, user, target) {
+    if (user.sendMessage("informBeginTurn")) {
+        return;
+    }
+    var effect = new StatusEffect("PursuitEffect");
+    effect.vetoTier = -5;   // TODO (?)
+    effect.target = target;
+    effect.tier = 0;
+    effect.tick = function() {
+        this.subject.removeStatus(this);
+    };
+    effect.informWithdraw = function(subject) {
+        if (subject != this.target)
+            return;
+        this.executed = true;
+        this.subject.execute(move, subject);
+        this.subject.setPp(move, this.subject.getPp(move) - 1);
+    };
+    effect.vetoExecution = function(field, user, target, move) {
+        if (target != null)
+            return false;
+        if (user != this.subject)
+            return false;
+        if (!this.executed)
+            return false;
+        return true;
+    };
+    user.applyStatus(user, effect);
+};
+]]>
+</init>
+<use>
+<![CDATA[
+this.power = this.power_;
+var effect = user.getStatus("PursuitEffect");
+var switching = effect && effect.executed;
+if (switching) {
+    this.power *= 2;
+}
+target.hp -= field.calculate(this, user, target, targets);
+if (target.fainted && switching && (user.party == field.host)) {
+    getGlobalController(user).simulateBufferOverflow();
+}
+]]>
+</use>
+</move>
+
+<move name="Rapid Spin" id="230">
+<type>Miasma</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+var damage = field.calculate(this, user, target, targets);
+if (damage == 0)
+    return;
+target.hp -= damage;
+var released = false;
+["LeechSeedEffect", "TemporaryTrappingEffect"].forEach(function(id) {
+    var effect = user.getStatus(id);
+    if (effect) {
+        released = true;
+        user.removeStatus(effect);
+    }
+});
+if (released) {
+    field.print(Text.battle_messages_unique(18, user));
+}
+var hazards = getHazardController(user);
+var effects = hazards.effects_[user.party];
+for (var i in effects) {
+    var layers = effects[i];
+    if (layers > 0) {
+        field.print(Text.battle_messages_unique(19, user, EntryHazard[i].name));
+    }
+}
+hazards.clearHazards(user.party);
+]]>
+</use>
+</move>
+
+<move name="Nature Power" id="231">
+<type>Nature</type>
+<class>Special</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMassBasedMove(this);
+]]>
+</init>
+</move>
+
+<move name="Steel Fist" id="232">
+<type>Steel</type>
+<class>Physical</class>
+<power>100</power>
+<accuracy>0.80</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, -1), 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Metal Claw" id="233">
+<type>Steel</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ATTACK, 1), 0.1, true]]);
+]]>
+</init>
+</move>
+
+<move name="Vital Throw" id="234">
+<type>Heart</type>
+<class>Physical</class>
+<priority>-1</priority>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+var damage = field.calculate(this, user, target, targets);
+if (damage) {
+    target.hp -= damage;
+    if (target.item && !target.sendMessage("informRemoveItem") && field.random(0.50)) {
+        field.print(Text.battle_messages_unique(12, user, target, target.item));
+        target.item = null;
+    }
+}
+]]>
+</use>
+</move>
+
+<move name="Energy Light" id="235">
+<type>Nature</type>
+<class>Special</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -1), 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Synthesis" id="236">
+<type>Nature</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>5</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+makeWeatherBasedHealingMove(this);
+]]>
+</init>
+</move>
+
+<move name="LUNATIC" id="237">
+<type>Steel</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -1), 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Charge" id="238">
+<type>Heart</type>
+<class>Special</class>
+<power>50</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPATTACK, 1), 0.7, true]]);
+]]>
+</init>
+</move>
+
+<move name="Cross Chop" id="239">
+<type>Dream</type>
+<class>Physical</class>
+<power>100</power>
+<accuracy>0.85</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Twister" id="240">
+<type>Wind</type>
+<class>Special</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+var damage = field.calculate(this, user, target, targets);
+if (damage == 0)
+    return;
+target.hp -= damage;
+var released = false;
+["LeechSeedEffect", "TemporaryTrappingEffect"].forEach(function(id) {
+    var effect = user.getStatus(id);
+    if (effect) {
+        released = true;
+        user.removeStatus(effect);
+    }
+});
+if (released) {
+    field.print(Text.battle_messages_unique(18, user));
+}
+var hazards = getHazardController(user);
+var effects = hazards.effects_[user.party];
+for (var i in effects) {
+    var layers = effects[i];
+    if (layers > 0) {
+        field.print(Text.battle_messages_unique(19, user, EntryHazard[i].name));
+    }
+}
+hazards.clearHazards(user.party);
+]]>
+</use>
+</move>
+
+<move name="Rain Dance" id="241">
+<type>Water</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>5</pp>
+<target>All</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+makeWeatherMove(this, GlobalEffect.RAIN);
+]]>
+</init>
+</move>
+
+<move name="Sunny Day" id="242">
+<type>Fire</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>5</pp>
+<target>All</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+makeWeatherMove(this, GlobalEffect.SUN);
+]]>
+</init>
+</move>
+
+<move name="Crunch" id="243">
+<type>Beast</type>
+<class>Physical</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, -1), 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Mirror Coat" id="244">
+<type>Heart</type>
+<class>Special</class>
+<priority>-5</priority>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>None</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+makeCounterMove(this, MoveClass.SPECIAL, 2);
+]]>
+</init>
+</move>
+
+<move name="Psych Up" id="245">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+for (var i = 1; i < 8; ++i) {
+    var level = target.getStatLevel(i) - user.getStatLevel(i);
+    if (level) {
+        var effect = new StatChangeEffect(i, level);
+        effect.silent = true;
+        user.applyStatus(user, effect);
+    }
+}
+field.print(Text.battle_messages_unique(17, user));
+]]>
+</use>
+</move>
+
+<move name="Extremespeed" id="246">
+<type>Illusion</type>
+<class>Physical</class>
+<priority>1</priority>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Ancientpower" id="247">
+<type>Earth</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, 1), 0.2, true]]);
+]]>
+</init>
+</move>
+
+<move name="Shadow Ball" id="248">
+<type>Ghost</type>
+<class>Special</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -1), 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Psycho Cut" id="249">
+<type>Reason</type>
+<class>Physical</class>
+<power>70</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Rock Smash" id="250">
+<type>Dream</type>
+<class>Physical</class>
+<power>50</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, -1), 0.5]]);
+]]>
+</init>
+</move>
+
+<move name="Whirlpool" id="251">
+<type>Water</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeTemporaryTrappingMove(this, Text.battle_messages_unique.wrap(74));
+]]>
+</init>
+</move>
+
+<move name="Beat Up" id="252">
+<type>Dark</type>
+<class>Physical</class>
+<power>10</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+this.power_ = this.power;
+]]>
+</init>
+<use>
+<![CDATA[
+this.power = this.power_;
+if (user.getStatus("HelpingHandEffect")) {
+    this.power *= 1.5;
+}
+var defence = target.base[Stat.DEFENCE];
+var size = field.getPartySize(user.party);
+for (var i = 0; i < size; ++i) {
+    var p = field.getPokemon(user.party, i);
+    if (p.fainted || p.getStatus(StatusEffect.SPECIAL_EFFECT))
+        continue;
+    // TODO: There needs to some function to inform the client about the other
+    //       pokemon in the user of Beat Up's party.
+    field.print(Text.battle_messages_unique(7, p)); // TODO (!)
+    var damage = Math.floor(Math.floor((Math.floor(p.level * 2 / 5) + 2)
+            * this.power * p.base[Stat.ATTACK] / 50) / defence) + 2;
+    if (field.isCriticalHit(this, user, target)) {
+        damage *= user.sendMessage("informCritical") || 2;
+        field.print(Text.battle_messages(9));
+        target.sendMessage("informCriticalHit");
+    }
+    damage = Math.floor(damage * Math.floor(field.random(217, 255)
+            * 100 / 255) / 100);
+    target.hp -= damage;
+}
+]]>
+</use>
+</move>
+
+<move name="Fake Out" id="253">
+<type>Heart</type>
+<class>Physical</class>
+<priority>1</priority>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect]]);
+var parent = this.use;
+this.use = function(field, user, target, targets) {
+    if (user.acted) {
+        field.print(Text.battle_messages(0));
+        return;
+    }
+    parent.call(this, field, user, target, targets);
+};
+]]>
+</init>
+</move>
+
+<move name="Performance" id="254">
+<type>Ghost</type>
+<class>Special</class>
+<power>100</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Randenemy</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+this.prepareSelf = function(field, user) {
+    user.setForcedMove(this, null, false);
+    if (user.getStatus("RampageEffect"))
+        return;
+    var effect = new StatusEffect("RampageEffect");
+    effect.tier = 6.1; // Arbitrary, but needs to be after sleep.
+    effect.turns = field.random(2, 5);
+    effect.vetoSwitch = function(subject) {
+        return (subject == this.subject);
+    };
+    effect.unapplyEffect = function() {
+        this.subject.clearForcedMove();
+        var effect = this.subject.getStatus("UproarEffect");
+        if (effect) {
+            effect.removeUser();
+        }
+        field.print(Text.battle_messages_unique(153, this.subject));
+    };
+    effect.informFreeze = effect.informSleep = function() {
+        this.subject.removeStatus(this);
+    };
+    effect.informFinishedSubjectExecution = function() {
+        if (!this.subject.lastMove) {
+            this.subject.removeStatus(this);
+        }
+    };
+    effect.tick = function() {
+        if (--this.turns == 0) {
+            this.subject.removeStatus(this);
+        }
+    };
+    user.applyStatus(user, effect);
+    effect = user.getStatus("UproarEffect");
+    if (!effect) {
+        effect = getGlobalController(user).applyGlobalEffect(user,
+                GlobalEffect.UPROAR);
+    }
+    ++effect.users_;
+    field.print(Text.battle_messages_unique(152, user));
+};
+]]>
+</init>
+</move>
+
+<move name="Nasty Plot" id="255">
+<type>Dark</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.SPATTACK, 2));
+]]>
+</use>
+</move>
+
+<move name="Mirror Shot" id="256">
+<type>Heart</type>
+<class>Special</class>
+<power>65</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ACCURACY, -1), 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Mystic Water" id="257">
+<type>Water</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+if (user.getStatus("IngrainEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var move_ = this;
+var effect = new StatusEffect("IngrainEffect");
+effect.name = Text.battle_messages_unique(142);
+effect.tier = 6;
+effect.subtier = 1;
+effect.tick = function() {
+    var max = this.subject.getStat(Stat.HP);
+    if (this.subject.hp == max)
+        return;
+    var delta = Math.floor(max / 16);
+    if (this.subject.sendMessage("informRecoilDamage", -delta, move_))
+        return;
+    var adjusted = this.subject.sendMessage("informAbsorbHealth", this.subject, delta);
+    if (adjusted)
+        delta = adjusted;
+    field.print(Text.battle_messages_unique(144, this.subject));
+    this.subject.hp += delta;
+};
+effect.vulnerability = function(user, target) {
+    if (target != this.subject)
+        return -1;
+    return Type.EARTH;
+};
+effect.vetoSwitch = function(subject) {
+    return (subject == this.subject);
+};
+effect.informRandomSwitch = function() {
+    // Block Roar and Whirlwind.
+    return true;
+};
+user.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(143, user));
+]]>
+</use>
+</move>
+
+<move name="Heat Wave" id="258">
+<type>Fire</type>
+<class>Special</class>
+<power>100</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[BurnEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Hail" id="259">
+<type>Ice</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>All</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+makeWeatherMove(this, GlobalEffect.HAIL);
+]]>
+</init>
+</move>
+
+<move name="Torment" id="260">
+<type>Dark</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+if (target.getStatus("TormentEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var effect = new StatusEffect("TormentEffect");
+effect.name = Text.battle_messages_unique(65);
+effect.vetoSelection = function(user, move) {
+    if (user != this.subject)
+        return false;
+    if (!this.set_) {
+        this.move = user.lastMove;
+        this.set_ = true;
+    }
+    if (!this.move)
+        return false;
+    return (this.move.name == move.name);
+};
+effect.informFinishedSubjectExecution = function() {
+    this.move = this.subject.lastMove;
+    this.set_ = true;
+};
+target.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(66, target));
+]]>
+</use>
+</move>
+
+<move name="Lucky Chant" id="261">
+<type>Faith</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.SPDEFENCE, 2));
+]]>
+</use>
+</move>
+
+<move name="Will-o-wisp" id="262">
+<type>Fire</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.75</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[BurnEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Memento" id="263">
+<type>Ghost</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ATTACK, -2)],
+        [new StatChangeEffect(Stat.SPATTACK, -2)]]);
+this.prepareSelf = function(field, user) {
+    user.faint();
+};
+]]>
+</init>
+</move>
+
+<move name="Facade" id="264">
+<type>Illusion</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+this.power_ = this.power;
+]]>
+</init>
+<use>
+<![CDATA[
+this.power = this.power_;
+if (user.getStatus(StatusEffect.SPECIAL_EFFECT)) {
+    this.power *= 2;
+}
+target.hp -= field.calculate(this, user, target, targets);
+]]>
+</use>
+</move>
+
+<move name="Focus Punch" id="265">
+<type>Dream</type>
+<class>Physical</class>
+<priority>-3</priority>
+<power>150</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+</flags>
+<init>
+<![CDATA[
+this.beginTurn = function(field, user) {
+    if (!user.sendMessage("informBeginTurn")) {
+        field.print(Text.battle_messages_unique(22, user));
+    }
+    var effect = new StatusEffect("FocusPunchEffect");
+    effect.vetoTier = 11;    // TODO: Get the correct tier.
+    effect.tier = 0;
+    effect.tick = function() {
+        this.subject.removeStatus(this);
+    };
+    effect.informDamaged = function(user, move) {
+        if (move.name != "Pain Split") {
+            this.lostFocus = true;
+        }
+    };
+    effect.vetoExecution = function(field, user, target, move) {
+        if (target != null)
+            return false;
+        if (!this.lostFocus)
+            return false;
+        if (user != this.subject)
+            return false;
+        field.print(Text.battle_messages_unique(23, user));
+        return true;
+    };
+    user.applyStatus(user, effect);
+}
+]]>
+</init>
+</move>
+
+<move name="Smellingsalt" id="266">
+<type>Faith</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+this.power_ = this.power;
+]]>
+</init>
+<use>
+<![CDATA[
+this.power = this.power_;
+var effect = target.getStatus("ParalysisEffect");
+if (target.getStatus("SubstituteEffect")) {
+    effect = null;
+}
+if (effect) {
+    this.power *= 2;
+}
+target.hp -= field.calculate(this, user, target, targets);
+if (effect) {
+    target.removeStatus(effect);
+}
+]]>
+</use>
+</move>
+
+<move name="Disturbance" id="267">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0.90</accuracy>
+<pp>20</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ACCURACY, -1)]]);
+]]>
+</init>
+</move>
+
+<move name="Rock Bullet" id="268">
+<type>Earth</type>
+<class>Physical</class>
+<priority>1</priority>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Battery Charge" id="269">
+<type>Wind</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>40</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.SPATTACK, 1));
+]]>
+</use>
+</move>
+
+<move name="Taunt" id="270">
+<type>Dark</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+if (target.getStatus("TauntEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var effect = new StatusEffect("TauntEffect");
+effect.name = Text.battle_messages_unique(29);
+effect.turns = 2;
+effect.tier = 0;
+effect.vetoTier = 7;
+effect.applyEffect = function() {
+    field.print(Text.battle_messages_unique(28, this.subject));
+    return true;
+};
+effect.tick = function() {
+    if (--this.turns <= 0) {
+        //field.print(Text.battle_messages_unique(26, this.subject));
+        this.subject.removeStatus(this);
+    }
+};
+effect.vetoSelection = function(user, move) {
+    if (user != this.subject)
+        return false;
+    return (move.moveClass == MoveClass.OTHER);
+};
+effect.vetoExecution = function(field, user, target, move) {
+    if (target != null)
+        return false;
+    if (user != this.subject)
+        return false;
+    if (move.moveClass != MoveClass.OTHER)
+        return false;
+    field.print(Text.battle_messages_unique(27, this.subject, move));
+    return true;
+};
+target.applyStatus(user, effect);
+]]>
+</use>
+</move>
+
+<move name="Helping Hand" id="271">
+<type>Heart</type>
+<class>Other</class>
+<priority>5</priority>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Ally</target>
+<flags>
+
+</flags>
+<use>
+<![CDATA[
+if ((user == target) || !target.turn || target.getStatus("HelpingHandEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var effect = new StatusEffect("HelpingHandEffect");
+effect.modifier = function(field, user, target, move, critical) {
+    if (user != this.subject)
+        return null;
+    return [0, 1.5, -1];
+};
+effect.informFinishedSubjectExecution = function() {
+    this.subject.removeStatus(this);
+};
+target.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(93, user, target));
+]]>
+</use>
+</move>
+
+<move name="Trick" id="272">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeItemSwitchMove(this);
+]]>
+</init>
+</move>
+
+<!-- NOTE: Should be a Transform copy. -->
+<move name="Recollection" id="273">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <unimplemented/>
+</flags>
+<use>
+<![CDATA[
+
+]]>
+</use>
+</move>
+
+<move name="Wish" id="274">
+<type>Faith</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+
+</flags>
+<use>
+<![CDATA[
+if (user.getStatus("WishEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var effect = new StatusEffect("WishEffect");
+effect.name = "Wish";
+effect.turns = 2;
+effect.party_ = user.party;
+effect.position_ = user.position;
+effect.tier = 2;
+effect.subtier = 0;
+effect.applyEffect = function() {
+    if (this.subject.party != this.party_)
+        return false;
+    if (this.subject.position != this.position_)
+        return false;
+    return true;
+};
+effect.beginTick = function() {
+    if (--this.turns < 0) {
+        this.subject.field.removeStatus(this);
+    }
+};
+effect.tick = function() {
+    if (this.turns != 0)
+        return;
+    if (!user.sendMessage("informHealing")) {
+        this.subject.field.print(Text.battle_messages_unique(78));
+        var hp = Math.floor(this.subject.getStat(Stat.HP) / 2);
+        if (hp < 1) hp = 1;
+        this.subject.hp += hp;
+    }
+    field.removeStatus(this);
+};
+field.print(Text.battle_messages_unique(77, user));
+field.applyStatus(effect);
+]]>
+</use>
+</move>
+
+<move name="Assist" id="275">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>None</target>
+<flags>
+
+</flags>
+<init>
+<![CDATA[
+this.forbidden_ = ["Metronome", "Struggle", "Sketch", "Mimic",
+                   "Sleep Talk", "Assist", "Mirror Move", "Counter",
+                   "Mirror Coat", "Detect", "Endure",
+                   "Destiny Bond", "Thief", "Follow Me", "Snatch",
+                   "Helping Hand", "Wanting", "Trick", "Focus Punch"];
+]]>
+</init>
+<use>
+<![CDATA[
+var choices = [];
+var size = field.getPartySize(user.party);
+for (var i = 0; i < size; ++i) {
+    var p = field.getPokemon(user.party, i);
+    if (p == user)
+        continue;
+    for (var j = 0; j < p.moveCount; ++j) {
+        var move = p.getMove(j);
+        if (this.forbidden_.indexOf(move.name) == -1) {
+            choices.push(move);
+        }
+    }
+}
+var length = choices.length;
+if (length == 0) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var choice = choices[field.random(0, length - 1)];
+user.execute(choice);
+]]>
+</use>
+</move>
+
+<move name="Ingrain" id="276">
+<type>Nature</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+if (user.getStatus("IngrainEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var move_ = this;
+var effect = new StatusEffect("IngrainEffect");
+effect.name = Text.battle_messages_unique(142);
+effect.tier = 6;
+effect.subtier = 1;
+effect.tick = function() {
+    var max = this.subject.getStat(Stat.HP);
+    if (this.subject.hp == max)
+        return;
+    var delta = Math.floor(max / 16);
+    if (this.subject.sendMessage("informRecoilDamage", -delta, move_))
+        return;
+    var adjusted = this.subject.sendMessage("informAbsorbHealth", this.subject, delta);
+    if (adjusted)
+        delta = adjusted;
+    field.print(Text.battle_messages_unique(144, this.subject));
+    this.subject.hp += delta;
+};
+effect.vulnerability = function(user, target) {
+    if (target != this.subject)
+        return -1;
+    return Type.EARTH;
+};
+effect.vetoSwitch = function(subject) {
+    return (subject == this.subject);
+};
+effect.informRandomSwitch = function() {
+    // Block Roar and Whirlwind.
+    return true;
+};
+user.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(143, user));
+]]>
+</use>
+</move>
+
+<move name="Superpower" id="277">
+<type>Dream</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [
+        [new StatChangeEffect(Stat.ATTACK, -1), 1, true],
+        [new StatChangeEffect(Stat.DEFENCE, -1), 1, true]
+    ]);
+]]>
+</init>
+</move>
+
+<move name="Magic Coat" id="278">
+<type>Reason</type>
+<class>Other</class>
+<priority>4</priority>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>15</pp>
+<target>None</target>
+<flags>
+
+</flags>
+<use>
+<![CDATA[
+var effect = new StatusEffect("MagicCoatEffect");
+effect.tier = 0;
+effect.vetoExecution = function(field, user, target, move) {
+    if (target != this.subject)
+        return false;
+    if (!move.flags[Flag.REFLECT])
+        return false;
+    if (move.prepareSelf) {
+        move.prepareSelf(field, target, user);
+    }
+    if (move.use) {
+        move.use(field, target, user, 1);
+    }
+    return true;
+};
+effect.tick = function() {
+    this.subject.removeStatus(this);
+};
+user.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(43, user));
+]]>
+</use>
+</move>
+
+<move name="Recycle" id="279">
+<type>Water</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+
+</flags>
+<use>
+<![CDATA[
+var effect = user.getStatus("ConsumedItemEffect");
+if (user.item || !effect) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+user.item = HoldItem[effect.item_];
+field.print(Text.battle_messages_unique(146, user, user.item));
+]]>
+</use>
+</move>
+
+<move name="Revenge" id="280">
+<type>Dream</type>
+<class>Physical</class>
+<priority>-4</priority>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeRevengeMove(this);
+]]>
+</init>
+</move>
+
+<move name="Brick Break" id="281">
+<type>Dream</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+var removed = false;
+for (var i = 0; i < 2; ++i) {
+    var effect = target.getStatus("BuffEffect" + i);
+    if (effect) {
+        field.removeStatus(effect);
+        removed = true;
+    }
+}
+if (removed) {
+    field.print(Text.battle_messages_unique(20));
+}
+target.hp -= field.calculate(this, user, target, targets);
+]]>
+</use>
+</move>
+
+<move name="Yawn" id="282">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+if (target.getStatus("YawnEffect")
+        || target.getStatus(StatusEffect.SPECIAL_EFFECT)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var effect = new StatusEffect("YawnEffect");
+effect.name = Text.battle_messages_unique(91);
+effect.tier = 6;
+effect.subtier = 10;
+effect.turns_ = 2;
+effect.tick = function() {
+    if (--this.turns_ > 0)
+        return;
+    var sleepeff = new SleepEffect();
+    sleepeff.piercesub = true;
+    this.subject.applyStatus(user, sleepeff);
+    this.subject.removeStatus(this);
+};
+target.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(92, target));
+]]>
+</use>
+</move>
+
+<move name="Braver" id="283">
+<type>Steel</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, -1), 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Endeavor" id="284">
+<type>Flying</type>
+<class>Physical</class>
+<power>1</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<use>
+<![CDATA[
+var damage = target.hp - user.hp;
+if (damage <= 0) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+if (target.isImmune(this)) {
+    field.print(Text.battle_messages(1, target));
+    return;
+}
+target.hp -= damage;
+]]>
+</use>
+</move>
+
+<move name="Eruption" id="285">
+<type>Fire</type>
+<class>Special</class>
+<power>150</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeUserHealthMove(this);
+]]>
+</init>
+</move>
+
+<move name="Skill Swap" id="286">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<use>
+<![CDATA[
+if (!user.ability || !target.ability
+        || user.hasAbility("Play Ghost")
+        || target.hasAbility("Play Ghost")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+field.print(Text.battle_messages_unique(15, user));
+var id_ = user.ability.id;
+user.ability = target.ability;
+target.ability = Ability[id_];
+// Note: The following two lines happen only in Platinum, not DP.
+// user.ability.switchIn();
+// target.ability.switchIn();
+]]>
+</use>
+</move>
+
+<move name="Imprison" id="287">
+<type>Faith</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+    <protect/>
+</flags>
+<use>
+<![CDATA[
+if (user.getStatus("ImprisonEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var moves = [];
+for (var i = 0; i < user.moveCount; ++i) {
+    moves.push(user.getMove(i));
+}
+var success = false;
+var party = 1 - user.party;
+for (var i = 0; i < field.partySize; ++i) {
+    var p = field.getActivePokemon(party, i);
+    if (p) {
+        moves.forEach(function(move) {
+            if (p.getPp(move) != -1) {
+                success = true;
+            }
+        });
+    }
+}
+if (!success) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+var effect = new StatusEffect("ImprisonEffect");
+effect.name = Text.battle_messages_unique(101);
+effect.radius = StatusEffect.RADIUS_ENEMY_PARTY;
+effect.vetoTier = 3;
+effect.vetoExecution = function(field, user, target, move) {
+    if (user.party == this.subject.party)
+        return false;
+    if (target != null)
+        return false;
+    if (this.subject.getPp(move) == -1)
+        return false;
+    field.print(Text.battle_messages_unique(148, user, move));
+    return true;
+};
+effect.vetoSelection = function(user, move) {
+    if (user.party == this.subject.party)
+        return false;
+    if (this.subject.getPp(move) == -1)
+        return false;
+    return true;
+};
+user.applyStatus(user, effect);
+field.print(Text.battle_messages_unique(102, user));
+]]>
+</use>
+</move>
+
+<move name="Refresh" id="288">
+<type>Water</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+var effect = user.getStatus(StatusEffect.SPECIAL_EFFECT);
+if (!effect || (effect.id == "SleepEffect")) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+field.print(Text.battle_messages_unique(1, user, effect));
+user.removeStatus(effect);
+]]>
+</use>
+</move>
+
+<move name="Shadow Dance" id="289">
+<type>Ghost</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Randenemy</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeRampageMove(this);
+]]>
+</init>
+</move>
+
+<move name="Snatch" id="290">
+<type>Dark</type>
+<class>Other</class>
+<priority>4</priority>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>None</target>
+<flags>
+    <unimplemented/>
+</flags>
+<use>
+<![CDATA[
+
+]]>
+</use>
+</move>
+
+<move name="Secret Power" id="291">
+<type>Illusion</type>
+<class>Special</class>
+<power>70</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+// Secret Power's secondary effect is always paralysis in a link battle.
+makeStatusMove(this, [[ParalysisEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Shadow Dive" id="292">
+<type>Ghost</type>
+<class>Physical</class>
+<power>140</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeChargeMove(this, Text.battle_messages_charge.wrap(8), []);
+]]>
+</init>
+</move>
+
+<move name="Force Palm" id="293">
+<type>Faith</type>
+<class>Physical</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Camouflage" id="294">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+// Camouflage always changes the user to normal type in a link battle.
+const type = Type.ILLUSION;
+if (user.isType(type)) {
+    field.print(Text.battle_messages(0));
+    return;
+}
+user.setTypes([type]);
+field.print(Text.battle_messages_unique(9, user, Text.types(type)));
+]]>
+</use>
+</move>
+
+<move name="Mana Charge" id="295">
+<type>Reason</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.SPATTACK, 1));
+user.applyStatus(user, new StatChangeEffect(Stat.SPDEFENCE, 1));
+]]>
+</use>
+</move>
+
+<move name="Luster Purge" id="296">
+<type>Reason</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -1), 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Mist Ball" id="297">
+<type>Heart</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ACCURACY, -1), 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Roost" id="298">
+<type>Flying</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+makeRecoveryMove(this);
+]]>
+</init>
+</move>
+
+<move name="Teeter Dance" id="299">
+<type>Heart</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Others</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ConfusionEffect]]);
+]]>
+</init>
+</move>
+
+<move name="Blaze Kick" id="300">
+<type>Fire</type>
+<class>Physical</class>
+<power>90</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <high-critical/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[BurnEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Mud Slap" id="301">
+<type>Earth</type>
+<class>Special</class>
+<power>30</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ACCURACY, -1), 1.0]]);
+]]>
+</init>
+</move>
+
+<move name="Ice Ball" id="302">
+<type>Ice</type>
+<class>Physical</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, -1), 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Needle Arm" id="303">
+<type>Nature</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Slack Off" id="304">
+<type>Dream</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>10</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+makeRecoveryMove(this);
+]]>
+</init>
+</move>
+
+<move name="Hyper Voice" id="305">
+<type>Dream</type>
+<class>Special</class>
+<power>95</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Others</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <sound/>
+</flags>
+</move>
+
+<move name="Cross Poison" id="306">
+<type>Miasma</type>
+<class>Physical</class>
+<power>70</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <high-critical/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[PoisonEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Crush Claw" id="307">
+<type>Beast</type>
+<class>Physical</class>
+<power>75</power>
+<accuracy>0.95</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.DEFENCE, -1), 0.5]]);
+]]>
+</init>
+</move>
+
+<move name="Blast Burn" id="308">
+<type>Fire</type>
+<class>Special</class>
+<power>140</power>
+<accuracy>0.90</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPATTACK, -2), 1, true]]);
+]]>
+</init>
+</move>
+
+<move name="Hydro Cannon" id="309">
+<type>Water</type>
+<class>Special</class>
+<power>140</power>
+<accuracy>0.90</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPATTACK, -2), 1, true]]);
+]]>
+</init>
+</move>
+
+<move name="Meteor Mash" id="310">
+<type>Steel</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPEED, -1), 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Astonish" id="311">
+<type>Ghost</type>
+<class>Physical</class>
+<power>50</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Weather Ball" id="312">
+<type>Illusion</type>
+<class>Special</class>
+<power>50</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+var power_ = this.power;
+var type_ = this.type;
+this.prepareSelf = function(field, user) {
+    // TODO (NOTE): More mechanics made up by me.
+    this.type = type_;
+    this.power = power_;
+    var flags = getGlobalController(user).getFlags();
+    if (flags[GlobalEffect.SUN]) {
+        this.type = Type.FIRE;
+    } else if (flags[GlobalEffect.RAIN]) {
+        this.type = Type.WATER;
+    } else if (flags[GlobalEffect.SAND]) {
+        this.type = Type.BEAST;
+    } else if (flags[GlobalEffect.HAIL]) {
+        this.type = Type.ICE;
+    }
+    if ((this.type != type_) || flags[GlobalEffect.FOG]) {
+        this.power *= 2;
+    }
+};
+]]>
+</init>
+</move>
+
+<move name="Aromatherapy" id="313">
+<type>Nature</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>5</pp>
+<target>Allies</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusCureMove(this);
+]]>
+</init>
+</move>
+
+<move name="Fake Tears" id="314">
+<type>Dark</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPATTACK, -2), 1]]);
+]]>
+</init>
+</move>
+
+<move name="Air Slash" id="315">
+<type>Flying</type>
+<class>Special</class>
+<power>75</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Flare Blitz" id="316">
+<type>Fire</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, 3);
+]]>
+</init>
+</move>
+
+<move name="Double Team" id="317">
+<type>Illusion</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>15</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<init>
+<![CDATA[
+this.isEvasionMove_ = true;
+]]>
+</init>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.EVASION, 1));
+]]>
+</use>
+</move>
+
+<move name="Rock Tomb" id="318">
+<type>Earth</type>
+<class>Physical</class>
+<power>55</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPEED, -1), 1.0]]);
+]]>
+</init>
+</move>
+
+<move name="Silver Wind" id="327">
+<type>Faith</type>
+<class>Special</class>
+<power>120</power>
+<accuracy>0.80</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPEED, -1), 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Binding Voice" id="328">
+<type>Beast</type>
+<class>Special</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <sound/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Nature Sound" id="329">
+<type>Nature</type>
+<class>Special</class>
+<power>95</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <sound/>
+</flags>
+</move>
+
+<move name="Tickle" id="330">
+<type>Dream</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [
+        [new StatChangeEffect(Stat.ATTACK, -1)],
+        [new StatChangeEffect(Stat.DEFENCE, -1)]
+    ]);
+]]>
+</init>
+</move>
+
+<move name="Draco Meteor" id="331">
+<type>Illusion</type>
+<class>Special</class>
+<power>140</power>
+<accuracy>0.90</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPATTACK, -2), 1, true]]);
+]]>
+</init>
+</move>
+
+<move name="Aqua Shower" id="332">
+<type>Water</type>
+<class>Special</class>
+<power>150</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeUserHealthMove(this);
+]]>
+</init>
+</move>
+
+<move name="Signal Beam" id="333">
+<type>Heart</type>
+<class>Special</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ConfusionEffect, 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Shadow Punch" id="334">
+<type>Ghost</type>
+<class>Physical</class>
+<power>60</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Extrasensory" id="335">
+<type>Faith</type>
+<class>Special</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[FlinchEffect, 0.2]]);
+]]>
+</init>
+</move>
+
+<move name="Soar" id="336">
+<type>Flying</type>
+<class>Physical</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Sand Tomb" id="337">
+<type>Earth</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeTemporaryTrappingMove(this, Text.battle_messages_unique.wrap(74));
+]]>
+</init>
+</move>
+
+<move name="Sheer Cold" id="338">
+<type>Ice</type>
+<class>Special</class>
+<power>1</power>
+<accuracy>0.30</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeOneHitKillMove(this);
+]]>
+</init>
+</move>
+
+<move name="Muddy Water" id="339">
+<type>Water</type>
+<class>Special</class>
+<power>80</power>
+<accuracy>0.90</accuracy>
+<pp>15</pp>
+<target>Enemies</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.ACCURACY, -1), 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Bullet Seed" id="340">
+<type>Nature</type>
+<class>Physical</class>
+<power>25</power>
+<accuracy>0.95</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMultipleHitMove(this);
+]]>
+</init>
+</move>
+
+<move name="Blade Flash" id="341">
+<type>Steel</type>
+<class>Physical</class>
+<priority>1</priority>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Ice Shard" id="342">
+<type>Ice</type>
+<class>Physical</class>
+<priority>1</priority>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>30</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Iron Defense" id="343">
+<type>Steel</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>15</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.DEFENCE, 2));
+]]>
+</use>
+</move>
+
+<move name="Block" id="344">
+<type>Dream</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>1.00</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <reflect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeTrappingMove(this);
+]]>
+</init>
+</move>
+
+<move name="Howl" id="345">
+<type>Beast</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>40</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.ATTACK, 1));
+]]>
+</use>
+</move>
+
+<move name="Heart Break" id="346">
+<type>Dark</type>
+<class>Physical</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>15</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+</move>
+
+<move name="Frenzy Plant" id="347">
+<type>Nature</type>
+<class>Special</class>
+<power>140</power>
+<accuracy>0.90</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPATTACK, -2), 1, true]]);
+]]>
+</init>
+</move>
+
+<move name="Bulk Up" id="348">
+<type>Dream</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.ATTACK, 1));
+user.applyStatus(user, new StatChangeEffect(Stat.DEFENCE, 1));
+]]>
+</use>
+</move>
+
+<move name="Bounce" id="349">
+<type>Flying</type>
+<class>Physical</class>
+<power>85</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ParalysisEffect, 0.3]]);
+makeChargeMove(this,
+        Text.battle_messages_charge.wrap(7),
+        ["Gust", "Thunder", "Twister", "Soar"]);
+]]>
+</init>
+</move>
+
+
+<move name="Earth Power" id="350">
+<type>Earth</type>
+<class>Special</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPDEFENCE, -1), 0.1]]);
+]]>
+</init>
+</move>
+
+<move name="Poison Jab" id="351">
+<type>Miasma</type>
+<class>Physical</class>
+<power>80</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[PoisonEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Wanting" id="352">
+<type>Heart</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>1.00</accuracy>
+<pp>25</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+</flags>
+<init>
+<![CDATA[
+makeThiefMove(this);
+]]>
+</init>
+</move>
+
+<move name="Volt Tackle" id="353">
+<type>Wind</type>
+<class>Physical</class>
+<power>120</power>
+<accuracy>0.90</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeRecoilMove(this, 3);
+]]>
+</init>
+</move>
+
+<move name="Magical Leaf" id="354">
+<type>Nature</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Splashing" id="355">
+<type>Water</type>
+<class>Physical</class>
+<priority>-4</priority>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeRevengeMove(this);
+]]>
+</init>
+</move>
+
+<move name="Calm Mind" id="356">
+<type>Faith</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.SPATTACK, 1));
+user.applyStatus(user, new StatChangeEffect(Stat.SPDEFENCE, 1));
+]]>
+</use>
+</move>
+
+<move name="Leaf Blade" id="357">
+<type>Nature</type>
+<class>Physical</class>
+<power>90</power>
+<accuracy>1.00</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <contact/>
+    <protect/>
+    <memorable/>
+    <flinch/>
+    <high-critical/>
+</flags>
+</move>
+
+<move name="Tailwind" id="358">
+<type>Wind</type>
+<class>Other</class>
+<power>0</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>User</target>
+<flags>
+    <snatch/>
+</flags>
+<use>
+<![CDATA[
+user.applyStatus(user, new StatChangeEffect(Stat.ATTACK, 1));
+user.applyStatus(user, new StatChangeEffect(Stat.SPEED, 1));
+]]>
+</use>
+</move>
+
+<move name="Rock Blast" id="359">
+<type>Earth</type>
+<class>Physical</class>
+<power>25</power>
+<accuracy>0.95</accuracy>
+<pp>10</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeMultipleHitMove(this);
+]]>
+</init>
+</move>
+
+<move name="Shock Wave" id="360">
+<type>Wind</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Water Pulse" id="361">
+<type>Water</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>1.00</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[ConfusionEffect, 0.3]]);
+]]>
+</init>
+</move>
+
+<move name="Decision" id="362">
+<type>Faith</type>
+<class>Special</class>
+<power>60</power>
+<accuracy>0</accuracy>
+<pp>20</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+</move>
+
+<move name="Psycho Boost" id="363">
+<type>Reason</type>
+<class>Special</class>
+<power>140</power>
+<accuracy>0.90</accuracy>
+<pp>5</pp>
+<target>Non-user</target>
+<flags>
+    <protect/>
+    <memorable/>
+    <flinch/>
+</flags>
+<init>
+<![CDATA[
+makeStatusMove(this, [[new StatChangeEffect(Stat.SPATTACK, -2), 1, true]]);
+]]>
+</init>
+</move>
+
+<end></end>
+
+<!--
+   This is the move that a pokemon uses when it hits itself in confusion. It
+   is referenced only by the implementation of confusion in statuses.js.
+-->
+<move name="__confusion" id="364">
+<type>Typeless</type>
+<class>Physical</class>
+<power>40</power>
+<accuracy>0</accuracy>
+<pp>0</pp>
+<target>Non-user</target>
+<flags>
+    <no-critical/>
+    <internal/>
+</flags>
+</move>
+
+</shoddybattle>

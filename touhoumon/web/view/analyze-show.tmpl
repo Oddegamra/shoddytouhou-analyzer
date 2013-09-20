@@ -1,0 +1,130 @@
+<%inherit file="/base.tmpl"/>
+<%block name="content">
+<section id="team">
+<header>
+<h2>Team</h2>
+</header>
+<table>
+<tbody>
+<tr>
+% for touhou in team:
+<td class="team-cell">
+% if not touhou.is_shiny():
+<img src="${media(str(touhou.get_species().get_id()) + '.png')}" alt="${str(touhou)}" />
+% else:
+<img src="${media(str(touhou.get_species().get_id()) + '.shiny.png')}" alt="Shiny ${str(touhou)}" />
+% endif
+</td>
+% endfor
+</tr><tr>
+% for touhou in team:
+<th class="team-cell"><a href="${thppwiki(touhou.get_species().get_name().replace(' ', '_'))}">${str(touhou)}</a></th>
+% endfor
+</tr><tr>
+% for touhou in team:
+<td class="team-cell">
+% for type in touhou.get_typing().get_types():
+<span class="${type.get_name().lower()}">${type.get_name()}</span>
+% endfor
+</td>
+% endfor
+</tr>
+</tbody>
+</table>
+</section>
+
+<section id="offensive">
+<header>
+<h2>Offensive coverage</h2>
+</header>
+<table>
+<thead>
+<tr><th>Type</th><th>Effectiveness</th></tr>
+</thead>
+<tbody>
+% for type, effectiveness, touhous in off_coverage:
+<tr>
+	<td>${str(type)}:</td>
+	<td>${effectiveness} ${len(touhous)}x
+	% if effectiveness == "Strong":
+	(${", ".join([str(touhou) for touhou in touhous])})
+	% endif
+	</td>
+</tr>
+% endfor
+</tbody>
+</table>
+</section>
+
+<section id="defensive">
+<header>
+<h2>Defensive weaknesses</h2>
+</header>
+<table>
+<thead>
+<tr><th>Type</th><th>Weaknesses</th></tr>
+</thead>
+<tbody>
+% for type, touhous in def_weakness:
+<% if len(touhous) == 0: continue %>
+<tr>
+	<td>${str(type)}:</td>
+	<td>
+	% if len(touhous) >= len(team) // 2:
+	<strong>${len(touhous)}x</strong>
+	% else:
+	${len(touhous)}x
+	% endif
+	(${", ".join([str(touhou) for touhou in touhous])})
+	</td>
+</tr>
+% endfor
+</tbody>
+</table>
+
+<header>
+<h2>Defensive strengths</h2>
+</header>
+<table>
+<thead>
+<tr><th>Type</th><th>Strengths</th></tr>
+</thead>
+<tbody>
+% for type, touhous in def_strengths:
+<% if len(touhous) == 0: continue %>
+<tr>
+	<td>${str(type)}:</td>
+	<td>
+	% if len(touhous) >= len(team) // 2:
+	<strong>${len(touhous)}x</strong>
+	% else:
+	${len(touhous)}x
+	% endif
+	(${", ".join([str(touhou) for touhou in touhous])})
+	</td>
+</tr>
+% endfor
+</tbody>
+</table>
+</section>
+
+<section id="stats">
+<header>
+<h2>Overall stat spread</h2>
+</header>
+<table>
+<thead>
+<tr><th>Statistic</th><th>Team strength</th></tr>
+</thead>
+<tbody>
+% for stat in ('HP', 'Atk', 'Def', 'Spd', 'SAtk', 'SDef'):
+<tr>
+	<td>${stat}:</td>
+	<% value = stats[stat.lower()] %>
+	<td><div class="stat-block" style="width: ${int(value)}px">${value}</div></td>
+</tr>
+% endfor
+</tbody>
+</table>
+</section>
+</%block>

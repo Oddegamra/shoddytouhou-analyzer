@@ -1,0 +1,46 @@
+<%inherit file="/base.tmpl"/>
+<%block name="content">
+<section>
+<header>
+<h2>Interactive type information</h2>
+</header>
+<p>Enter either a typing (e.g. "Dark" or "Fire/Water") or a Touhoumon name.
+Names should correspond to the names found in Shoddy Touhoumon. Abbreviations such as
+"CMomiji" in place of "Chibi Momiji" are supported. Please note that some
+names are longer than displayed in the games (e.g. CStar would be Chibi Star Sapphire).
+</p>
+<noscript><p>This page works best with JavaScript enabled.</p></noscript>
+<form action="${make_url('interactiveold:index')}" method="post" onsubmit="return false;">
+<p>
+<label for="search">Typing/Name:</label>
+<input type="text" id="search" name="search"></input>
+<input type="submit" id="interactive_submit"></input>
+<input type="reset"></input>
+</p>
+<textarea id="interactive_output" name="interactive_output" readonly="readonly">${output}</textarea>
+</form>
+</section>
+
+<script type="text/javascript">
+document.getElementById("interactive_submit").addEventListener('click', function(evt) {
+	var input = document.getElementById('search');
+	var search = input.value;
+	input.value = "";
+	if (!search)
+		return;
+
+	var req = new XMLHttpRequest();
+	req.onreadystatechange = function() {
+		if(req.readyState == 4) {
+			var textarea = document.getElementById('interactive_output');
+			textarea.value += req.responseText;
+			textarea.scrollTop = textarea.scrollHeight;
+		}
+	}
+	
+	req.open("POST", "${make_url('interactiveold:get_info')}", true);
+	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	req.send("search=" + encodeURIComponent(search));
+}, false);
+</script>
+</%block>

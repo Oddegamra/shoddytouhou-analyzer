@@ -1,0 +1,14 @@
+<%inherit file="/base.tmpl"/>
+<%block name="content">
+<section>
+<header>
+<h2>Upload a Shoddy Touhoumon team file</h2>
+</header>
+<p>Please upload a team file created by <a href="http://thpp.supersanctuary.net/forum/index.php?topic=7.0">Shoddy Touhoumon's</a> team builder here. Team analysis will be
+available as soon as the file has been uploaded.</p>
+<form action="${make_url('analyze:analyze')}" enctype="multipart/form-data" method="post">
+<label for="teamfile">Team file:</label> <input type="file" id="teamfile" name="teamfile" />
+<input type="submit" value="Upload team file" />
+</form>
+</section>
+</%block>

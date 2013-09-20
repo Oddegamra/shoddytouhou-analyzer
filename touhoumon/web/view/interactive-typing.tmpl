@@ -1,0 +1,57 @@
+% if len(typing) <= 2:
+<section id="defensive">
+<header>
+<h2>Defensive stats</h2>
+</header>
+<table>
+<thead>
+<tr><th>Type</th><th>Effectiveness</th></tr>
+</thead>
+<tbody>
+% for othertype, dmg in def_stats:
+<tr>
+	<td class="${str(othertype).lower()}">${str(othertype)}:</td>
+	<td style="text-align: center;">
+	% if dmg > 1:
+	<b>${dmg}x</b>
+	% elif dmg < 1 and dmg > 0:
+	${dmg}x
+	% elif dmg == 0:
+	<i>${dmg}x</i>
+	%endif
+	</td>
+</tr>
+% endfor
+</tbody>
+</table>
+</section>
+% endif
+
+
+<section id="offensive">
+<header>
+<h2>Offensive coverage</h2>
+</header>
+<table>
+<thead>
+<tr><th>Type</th><th>Effectiveness</th></tr>
+</thead>
+<tbody>
+% for othertype, dmg in off_stats:
+<tr>
+	<td class="${str(othertype).lower()}">${str(othertype)}:</td>
+	<td style="text-align: center;">
+	% if dmg > 1:
+	<b>${dmg}x</b>
+	% elif dmg < 1 and dmg > 0:
+	${dmg}x
+	% elif dmg == 0:
+	<i>${dmg}x</i>
+	%endif
+	</td>
+</tr>
+% endfor
+</tbody>
+</table>
+<p><b>Coverage:</b> ${positive_coverage}/${typing_count}</p>
+</section>

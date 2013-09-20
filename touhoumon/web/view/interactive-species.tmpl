@@ -1,0 +1,31 @@
+<section id="team">
+<table style="min-width: 300px;">
+<tbody>
+% if species:
+<tr><td colspan="6" style="text-align: center;">
+<img src="${media(str(species.get_id()) + ".png")}" alt="${species.get_name()}" />
+</td></tr>
+<tr><th colspan="6" style="text-align: center; font-size: 1.2em;">
+<a href="${thppwiki(species.get_name().replace(' ', '_'))}">${species.get_name()}</a>
+</th></tr>
+% endif
+<tr><td colspan="6" style="text-align: center; \
+% if species:
+padding-bottom: 1em; \
+% endif
+">
+% for type in typing.get_types():
+	<a href="${thppwiki(type.get_name())}"><span class="${type.get_name().lower()}">${str(type)}</span></a>
+% endfor
+</td></tr>
+% if species:
+<tr><th>HP</th><th>Atk</th><th>Def</th><th>SpAtk</th><th>SpDef</th><th>Spd</th></tr>
+<tr>
+% for key in ('hp', 'atk', 'def', 'satk', 'sdef', 'spd'):
+<td>${species.get_base_stats()[key]}</td>
+% endfor
+</tr>
+% endif
+</tbody>
+</table>
+</section>
