@@ -18,6 +18,20 @@ names are longer than displayed in the games (e.g. CStar would be Chibi Star Sap
 </form>
 </section>
 
+<script type="text/javascript">
+$(function() {
+	<%
+	autoComplete = ','.join(["'{0}'".format(name) for name in completionNames])
+	%>
+	var completionNames = [${autoComplete}];
+	$('#search').autocomplete({
+		source: completionNames,
+		delay: 25,
+		minLength: 3
+	});
+});
+</script>
+
 <section id="interactive_output">
 ${output}
 </section>

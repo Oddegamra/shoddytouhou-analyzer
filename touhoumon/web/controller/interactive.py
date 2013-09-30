@@ -14,7 +14,15 @@ def index(app, req, search=None):
 	else:
 		output = ""
 
+	# Build list of names for auto-completion
+	completionNames = \
+			[ species.get_name() for species
+				in touhoumon.core.SpeciesFactory.get_all_species() ] + \
+			[ typing.get_name() for typing
+				in touhoumon.core.TypeChart.get_types() ]
+
 	return app.create_response(app.render_template('interactive-main',
+		completionNames=completionNames,
 		output=output))
 
 def get_info(app, req):
