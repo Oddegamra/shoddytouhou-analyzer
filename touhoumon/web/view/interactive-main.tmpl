@@ -20,14 +20,38 @@ names are longer than displayed in the games (e.g. CStar would be Chibi Star Sap
 
 <script type="text/javascript">
 $(function() {
+	// AJAX callback to get result from server for search text
+	var getSearchResult = function(searchText) {
+		$('#search').val('');
+		// Make sure to close the autocompletion field on submit
+		$('#search').autocomplete('close');
+		if (searchText) {
+			$.post("${make_url('interactive:get_info')}",
+				"search=" + encodeURIComponent(searchText),
+				function(data, textStatus, jqXHR) {
+					$('#interactive_output').html(data);
+				});
+		}
+	};
+	$('#interactive_submit').click(function () {
+		getSearchResult($('#search').val());
+	});
+
+	// Add autocompletion to input field
 	<%
+	completionNames.sort()
 	autoComplete = ','.join(["'{0}'".format(name) for name in completionNames])
 	%>
 	var completionNames = [${autoComplete}];
 	$('#search').autocomplete({
 		source: completionNames,
 		delay: 25,
-		minLength: 3
+		minLength: 3,
+		select: function(evt, ui) {
+			// Submit form as soon as item has been selected
+			getSearchResult(ui.item.label);
+			evt.preventDefault();
+		}
 	});
 });
 </script>
@@ -35,26 +59,4 @@ $(function() {
 <section id="interactive_output">
 ${output}
 </section>
-
-<script type="text/javascript">
-document.getElementById("interactive_submit").addEventListener('click', function(evt) {
-	var input = document.getElementById('search');
-	var search = input.value;
-	input.value = "";
-	if (!search)
-		return;
-
-	var req = new XMLHttpRequest();
-	req.onreadystatechange = function() {
-		if(req.readyState == 4) {
-			var outputarea = document.getElementById('interactive_output');
-			outputarea.innerHTML = req.responseText;
-		}
-	}
-	
-	req.open("POST", "${make_url('interactive:get_info')}", true);
-	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	req.send("search=" + encodeURIComponent(search));
-}, false);
-</script>
 </%block>
