@@ -3,12 +3,14 @@ import operator
 import touhoumon.core
 import touhoumon.core.touhou
 
-def index(app, req):
+def index(app, req, search=None):
 	""" Show interactive Touhoumon information view """
 
 	if 'search' in req.form and req.form['search']:
 		# If the page was called via POST
 		output = _evaluate_input(app, req.form['search'])
+	elif search:
+		output = _evaluate_input(app, search)
 	else:
 		output = ""
 

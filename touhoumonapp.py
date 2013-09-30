@@ -28,6 +28,8 @@ class TouhoumonApp(object):
 				endpoint='interactive:index'),
 			Rule('/touhou/interactive/info',
 				endpoint='interactive:get_info'),
+			Rule('/touhou/interactive/<path:search>',
+				endpoint='interactive:index'),
 			Rule('/touhou/interactive-old/',
 				endpoint='interactiveold:index'),
 			Rule('/touhou/interactive-old/info',
