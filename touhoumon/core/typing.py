@@ -42,8 +42,8 @@ class _TypeChart(object):
 		"""@param chart_data: Textual representation of type relations (see above) """
 
 		# Create types and their names
-		self.types = self._create_types(chart_data)	
-	
+		self.types = self._create_types(chart_data)
+
 	def _create_types(self, chart):
 		names = []
 		matrix = []
@@ -79,7 +79,7 @@ class _TypeChart(object):
 		raise Exception("Type {0} doesn't exist.".format(name))
 
 	def get_dual_type(self, names):
-		if isinstance(names, (str, unicode)):
+		if isinstance(names, str):
 			names = [name.strip() for name in names.split("/")]
 
 		types = [self.get_type(name) for name in names]
@@ -97,7 +97,7 @@ class Type(object):
 		self.off_multipliers = None
 		self.type_chart = type_chart
 		self._multipliers = multipliers
-	
+
 	def get_name(self):
 		""" Name of type """
 		return self.name
@@ -117,18 +117,18 @@ class Type(object):
 				self.def_multipliers[other_type] = strength
 
 			return self.def_multipliers
-	
+
 	def get_off_multipliers(self):
 		""" Multipliers against types when this type is attacking """
 		if self.off_multipliers:
 			return self.off_multipliers
 		else:
 			self.off_multipliers = {}
-			for type in self.get_def_multipliers().iterkeys():
+			for type in self.get_def_multipliers().keys():
 				self.off_multipliers[type] = type.get_def_multipliers()[self]
 
 			return self.off_multipliers
-	
+
 	def __eq__(self, other):
 		if isinstance(other, Type):
 			return self.name == other.name
@@ -137,12 +137,15 @@ class Type(object):
 
 	def __str__(self):
 		return self.get_name()
-	
+
 	def __repr__(self):
 		return "Type {0}".format(self.get_name())
 
 	def __len__(self):
 		return 1
+
+	def __hash__(self):
+		return hash(self.name)
 
 class DualType(Type):
 	def __init__(self, types):
@@ -158,7 +161,7 @@ class DualType(Type):
 			def_multipliers[type] = 1.0
 
 		for other_type in self.types:
-			for type, multiplier in other_type.get_def_multipliers().iteritems():
+			for type, multiplier in other_type.get_def_multipliers().items():
 				def_multipliers[type] *= multiplier
 
 		return def_multipliers
@@ -166,7 +169,7 @@ class DualType(Type):
 	def get_off_multipliers(self):
 		off_multipliers = {}
 		for other_type in self.types:
-			for type, multiplier in other_type.get_off_multipliers().iteritems():
+			for type, multiplier in other_type.get_off_multipliers().items():
 				if type in off_multipliers:
 					off_multipliers[type] = max(multiplier, off_multipliers[type])
 				else:

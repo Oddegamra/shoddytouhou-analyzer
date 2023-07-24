@@ -16,7 +16,7 @@ def index(app, req):
 
 def get_info(app, req):
 	""" Evaluate POST query (search) and return type information """
-	if 'search' not in req.form.keys():
+	if 'search' not in list(req.form.keys()):
 		output = ''
 	else:
 		typename = req.form['search']
@@ -51,18 +51,18 @@ def _evaluate_input(typename):
 	
 	if len(typing) <= 2:
 		output.append("\tDEFENSIVE STATS")
-		for othertype, dmg in typing.get_def_multipliers().iteritems():
+		for othertype, dmg in typing.get_def_multipliers().items():
 			if dmg > 1:
 				output.append("Weak: {0} x {1}".format(str(othertype), dmg))
-		for othertype, dmg in typing.get_def_multipliers().iteritems():
+		for othertype, dmg in typing.get_def_multipliers().items():
 			if dmg < 1 and dmg > 0:
 				output.append("Strong: {0} x {1}".format(str(othertype), dmg))
-		for othertype, dmg in typing.get_def_multipliers().iteritems():
+		for othertype, dmg in typing.get_def_multipliers().items():
 			if dmg == 0:
 				output.append("Immune: {0} x {1}".format(str(othertype), dmg))
 
 	# Sort damage by effectiveness
-	off_stats = sorted(typing.get_off_multipliers().items(),
+	off_stats = sorted(list(typing.get_off_multipliers().items()),
 					key=operator.itemgetter(1), reverse=True)
 	positive_coverage = len([stat for stat in off_stats if stat[1] >= 1])
 	output.append("\tOFFENSIVE STATS ({0}/{1} coverage)".format(

@@ -10,9 +10,9 @@
 % for touhou in team:
 <td class="team-cell">
 % if not touhou.is_shiny():
-<img src="${media(str(touhou.get_species().get_id()) + '.png')}" alt="${str(touhou)}" />
+<img src="${join_url(media, str(touhou.get_species().get_id()) + '.png')}" alt="${str(touhou)}" />
 % else:
-<img src="${media(str(touhou.get_species().get_id()) + '.shiny.png')}" alt="Shiny ${str(touhou)}" />
+<img src="${join_url(media, str(touhou.get_species().get_id()) + '.shiny.png')}" alt="Shiny ${str(touhou)}" />
 % endif
 </td>
 % endfor

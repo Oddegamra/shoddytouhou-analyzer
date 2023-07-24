@@ -98,7 +98,7 @@ class Team(object):
 		for touhou in self.get_members():
 			touhou_stats = touhou.get_species().get_base_stats()
 
-			for stat, val in touhou_stats.iteritems():
+			for stat, val in touhou_stats.items():
 				if stat not in stats:
 					stats[stat] = val
 				else:
@@ -163,7 +163,7 @@ class Touhou(object):
 
 			move_effectiveness = move.get_typing().get_off_multipliers()
 
-			for type, multiplier in move_effectiveness.iteritems():
+			for type, multiplier in move_effectiveness.items():
 				if (type not in types or
 				    types[type] < multiplier):
 					types[type] = multiplier

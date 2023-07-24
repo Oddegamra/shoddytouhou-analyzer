@@ -50,7 +50,7 @@ class Move(object):
 	def __eq__(self, other):
 		if isinstance(other, Move):
 			return self.get_name() == other.get_name()
-		elif isinstance(other, (str, unicode)):
+		elif isinstance(other, str):
 			return self.get_name() == other
 		else:
 			return False

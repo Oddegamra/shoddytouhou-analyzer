@@ -1,5 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os.path
+import urllib.parse
 import mako.template
 import mako.lookup
 from werkzeug.wrappers import Request, Response
@@ -7,7 +8,6 @@ from werkzeug.routing import Map, Rule
 from werkzeug.wsgi import responder
 from werkzeug.exceptions import HTTPException
 from werkzeug.utils import import_string
-from werkzeug.urls import Href
 
 import touhoumon.web.view
 
@@ -37,9 +37,9 @@ class TouhoumonApp(object):
 		])
 		self.make_url = None  # This is created when a request is dispatched
 		# Base URL for media files
-		self.media = Href('http://maya.sector-5.net/media/touhoumon')
+		self.media = 'https://maya.sector-5.net/media/touhoumon/'
 		# Base URL for THPP wiki links
-		self.thppwiki = Href('http://thpp.supersanctuary.net/wiki')
+		self.thppwiki = 'https://thpp.supersanctuary.net/wiki/'
 
 	def dispatch_request(self, request):
 		""" Dispatches the request to an appropriate controller function
@@ -52,9 +52,9 @@ class TouhoumonApp(object):
 			# Each controller function returns a Response object
 			# (they usually call create_response)
 			return func(self, request, **values)
-		except HTTPException, e:
+		except HTTPException as e:
 			return e
-	
+
 	def get_template(self, name):
 		""" Retrieves the template matching <name> from the view
 		directory. """
@@ -69,7 +69,9 @@ class TouhoumonApp(object):
 		arguments. Also inserts a few default values into the
 		template context, such as make_url. """
 		tmpl = self.get_template(name)
-		return tmpl.render(make_url=self.make_url, media=self.media,
+		return tmpl.render(make_url=self.make_url,
+                join_url=urllib.parse.urljoin,
+                media=self.media,
 				thppwiki=self.thppwiki,
 				**kwargs)
 

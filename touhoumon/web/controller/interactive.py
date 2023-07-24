@@ -27,7 +27,7 @@ def index(app, req, search=None):
 
 def get_info(app, req):
 	""" Evaluate POST query (search) and return type information """
-	if 'search' not in req.form.keys():
+	if 'search' not in list(req.form.keys()):
 		output = ''
 	else:
 		typename = req.form['search']
@@ -55,14 +55,13 @@ def _evaluate_input(app, typename):
 		species=species, typing=typing)
 
 	# Sort damage by effectiveness and exclude neutral attacks
-	def_stats = filter(lambda stat: stat[1] != 1,
-					sorted(typing.get_def_multipliers().items(),
-						key=operator.itemgetter(1), reverse=True))
-	off_stats = sorted(typing.get_off_multipliers().items(),
+	def_stats = [stat for stat in sorted(list(typing.get_def_multipliers().items()),
+						key=operator.itemgetter(1), reverse=True) if stat[1] != 1]
+	off_stats = sorted(list(typing.get_off_multipliers().items()),
 				key=operator.itemgetter(1), reverse=True)
 	typing_count = len(off_stats)
 	positive_coverage = len([stat for stat in off_stats if stat[1] >= 1])
-	off_stats = filter(lambda stat: stat[1] != 1, off_stats)
+	off_stats = [stat for stat in off_stats if stat[1] != 1]
 
 	typing_part = app.render_template('interactive-typing',
 		typing=typing, def_stats=def_stats,

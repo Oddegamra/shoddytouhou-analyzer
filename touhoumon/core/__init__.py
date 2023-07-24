@@ -1,8 +1,8 @@
 import os.path
 
-import move
-import species
-import typing
+from . import move
+from . import species
+from . import typing
 import touhoumon.resources
 
 RESOURCES = os.path.dirname(touhoumon.resources.__file__)

@@ -15,7 +15,7 @@ class SpeciesFactory(object):
 				self.species[species.attrib['name'].lower()] = Species(species)
 
 	def get_all_species(self):
-		return list(sorted(self.species.itervalues(), key=lambda s: s.get_id()))
+		return list(sorted(iter(self.species.values()), key=lambda s: s.get_id()))
 
 	def get_species(self, name):
 		lower_name = name.lower()
