@@ -39,7 +39,7 @@ class TouhoumonApp(object):
 		# Base URL for media files
 		self.media = 'https://maya.sector-5.net/media/touhoumon/'
 		# Base URL for THPP wiki links
-		self.thppwiki = 'https://thpp.supersanctuary.net/wiki/'
+		self.thppwiki = 'https://thpp.miraheze.org/wiki/'
 
 	def dispatch_request(self, request):
 		""" Dispatches the request to an appropriate controller function
